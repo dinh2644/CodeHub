@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import "../assets/CreatePage.css";
 import { supabase } from "../client";
 import UploadImage from "../components/UploadImage";
+import JSONPretty from "react-json-pretty";
+import "react-json-pretty/themes/monikai.css";
 
 const CreatePage = () => {
   const [titleIsEmpty, setTitleIsEmpty] = useState(true);
-  const [post, setPost] = useState({ title: "", details: "" });
+  const [post, setPost] = useState({ title: "", details: "", code: "" });
   const handleChange = (event) => {
     const { name, value } = event.target;
     setPost((prev) => {
@@ -66,6 +68,21 @@ const CreatePage = () => {
                   value={post.details}
                   disabled={titleIsEmpty}
                 />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="details" className="form-label">
+                  Code:
+                </label>
+                <textarea
+                  type="text"
+                  className="form-control"
+                  id="code"
+                  name="code"
+                  onChange={handleChange}
+                  value={post.code}
+                  cols={30}
+                  rows={10}
+                ></textarea>
               </div>
 
               <button

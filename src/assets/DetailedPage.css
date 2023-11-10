@@ -12,6 +12,7 @@ code {
   border: 1px solid #dee2e6; /* Set border color for code */
   border-radius: 0.25rem; /* Optional: Add rounded corners */
   margin-bottom: 1rem;
+  color: var(--bs-code-color) !important;
 }
 
 hr {
