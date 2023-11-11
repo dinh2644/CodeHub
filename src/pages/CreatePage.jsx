@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import "../assets/CreatePage.css";
 import { supabase } from "../client";
 import UploadImage from "../components/UploadImage";
-import JSONPretty from "react-json-pretty";
-import "react-json-pretty/themes/monikai.css";
 
 const CreatePage = () => {
   const [titleIsEmpty, setTitleIsEmpty] = useState(true);

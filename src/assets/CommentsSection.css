@@ -1,0 +1,22 @@
+hr {
+  width: 100%;
+}
+
+.comment-section {
+  display: block;
+  max-height: 150px;
+  overflow-y: auto;
+  width: 100%;
+  padding: 0.25rem;
+  background-color: #ffeeee;
+  border: 1px solid #dee2e6;
+  color: black !important;
+}
+
+.comment-divider {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.content {
+}
