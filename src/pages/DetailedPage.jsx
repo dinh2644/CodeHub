@@ -13,6 +13,7 @@ const DetailedPage = ({ data }) => {
 
   // retrieve current single post and its amount of votes
   useEffect(() => {
+    //fetch post's data
     const fetchPosts = async () => {
       const { data, error } = await supabase
         .from("Posts")
@@ -26,7 +27,6 @@ const DetailedPage = ({ data }) => {
         setCount(data.votes);
       }
     };
-
     fetchPosts();
   }, [id]);
 
@@ -41,7 +41,7 @@ const DetailedPage = ({ data }) => {
     setCount(newCount);
 
     if (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -83,11 +83,13 @@ const DetailedPage = ({ data }) => {
   return (
     <>
       <div className="container detailedPageContainer">
+        {/* Title of post */}
         <div className="row">
           <div className="col mt-2">
             <h2>{post?.title}</h2>
           </div>
         </div>
+        {/* Asked on & Edit and Delete buttons */}
         <div className="row mb-2">
           <div className="col d-flex justify-content-between align-items-center">
             <span className="text-muted" style={{ fontSize: "14px" }}>
@@ -104,6 +106,7 @@ const DetailedPage = ({ data }) => {
           </div>
           <hr />
         </div>
+        {/* Voting */}
         <div className="row">
           <div className="col-1 d-flex flex-column align-items-center voteCell">
             <span
@@ -129,7 +132,13 @@ const DetailedPage = ({ data }) => {
             </pre>
           </div>
         </div>
-
+        {/* Image */}
+        <div className="row">
+          <div className="col">
+            <img src={post?.image} alt="" />
+          </div>
+        </div>
+        {/* Comment section */}
         <div className="row">
           <div className="col mt-4">
             <h5 className="me-2 " style={{ fontWeight: "400" }}>

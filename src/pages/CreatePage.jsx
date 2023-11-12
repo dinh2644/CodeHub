@@ -6,7 +6,12 @@ import { v4 as uuidv4 } from "uuid";
 
 const CreatePage = () => {
   const [titleIsEmpty, setTitleIsEmpty] = useState(true);
-  const [post, setPost] = useState({ title: "", details: "", code: "" });
+  const [post, setPost] = useState({
+    title: "",
+    details: "",
+    code: "",
+    image: "",
+  });
 
   // handle input change
   const handleChange = (event) => {
@@ -26,20 +31,46 @@ const CreatePage = () => {
     }
   };
 
-  // create post
-  const handleSubmit = async (image) => {
+  // handle image upload
+  const handleImageUpload = async (image) => {
     try {
-      const fileName = `images/avatar_${uuidv4()}.png`;
-      await supabase.from("Posts").insert([post]);
+      // upload image first to storage
+      const fileName = `images/${uuidv4()}.png`;
       await supabase.storage.from("uploads").upload(fileName, image, {
         cacheControl: "3600",
         upsert: false,
       });
+
+      // get public url of that image
+      const { data: imageURL } = supabase.storage
+        .from("uploads")
+        .getPublicUrl(fileName);
+
+      // extract url
+      const imageUrl = imageURL?.publicUrl;
+
+      // update state with the image URL
+      setPost((prev) => ({
+        ...prev,
+        image: imageUrl,
+      }));
     } catch (error) {
       console.error(error);
     }
   };
 
+  // create post
+  const handleSubmit = async () => {
+    // call image upload
+    handleImageUpload();
+    // create post as well as insert the image URL
+    const { error } = await supabase.from("Posts").insert([post]);
+
+    if (error) {
+      console.error(error);
+    }
+  };
+  console.log(post.image);
   return (
     <>
       <div className="container">
@@ -92,7 +123,7 @@ const CreatePage = () => {
                   rows={10}
                 ></textarea>
               </div>
-              <UploadImage handleFile={handleSubmit} />
+              <UploadImage handleFile={handleImageUpload} />
 
               <button
                 type="submit"

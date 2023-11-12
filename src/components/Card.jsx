@@ -23,6 +23,7 @@ const Card = ({ data }) => {
     fetchRepliesCount();
   }, []);
 
+  // get post's age
   const getTimeAgoString = (createdAt) => {
     const currentDate = new Date();
     const createdAtDate = new Date(createdAt);
@@ -46,9 +47,9 @@ const Card = ({ data }) => {
       return `${seconds} second${seconds !== 1 ? "s" : ""} ago`;
     }
   };
-
   const originalDate = data ? String(data.created_at) : "";
   const formattedDate = getTimeAgoString(originalDate);
+
   return (
     <>
       <div className="card" style={{ width: "80rem" }}>

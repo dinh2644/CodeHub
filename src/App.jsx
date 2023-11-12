@@ -10,6 +10,7 @@ import "./App.css";
 import { supabase } from "./client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+//import { v4 as uuidv4 } from "uuid";
 // Import pages
 import Navbar from "./components/Navbar";
 import PageNotFound from "./pages/PageNotFound";
