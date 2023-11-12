@@ -69,13 +69,15 @@ const DetailedPage = ({ data }) => {
     <>
       <div className="container detailedPageContainer">
         <div className="row">
-          <div className="col">
-            <h1>{post?.title}</h1>
+          <div className="col mt-2">
+            <h2>{post?.title}</h2>
           </div>
         </div>
-        <div className="row mb-3">
+        <div className="row mb-2">
           <div className="col">
-            <p className="text-muted">Asked on {formattedDate}</p>
+            <p className="text-muted" style={{ fontSize: "14px" }}>
+              Asked on {formattedDate}
+            </p>
             <hr />
           </div>
         </div>

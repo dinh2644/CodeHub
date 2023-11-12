@@ -20,7 +20,9 @@ import DetailedPage from "./pages/DetailedPage";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
+  const [query, setQuery] = useState("");
 
+  // fetch posts
   useEffect(() => {
     const fetchPosts = async () => {
       const { data, error } = await supabase
@@ -36,6 +38,12 @@ const App = () => {
     fetchPosts();
   }, []);
 
+  // handle search
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+  };
+  console.log(query);
+
   return (
     <>
       <Router>
@@ -44,12 +52,15 @@ const App = () => {
             path="/"
             element={
               <>
-                <Navbar />
+                <Navbar handleChange={handleChange} />
                 <Outlet />
               </>
             }
           >
-            <Route index={true} element={<HomePage data={posts} />} />
+            <Route
+              index={true}
+              element={<HomePage data={posts} searchQuery={query} />}
+            />
             <Route path="/askquestion" element={<CreatePage />} />
             <Route path="/update" element={<UpdatePage />} />
             <Route path="/:id" element={<DetailedPage data={posts} />} />

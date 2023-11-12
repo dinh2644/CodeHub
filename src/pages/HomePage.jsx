@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../assets/HomePage.css";
 import Card from "../components/Card";
 
-const HomePage = ({ data }) => {
+const HomePage = ({ data, searchQuery }) => {
   const [posts, setPosts] = useState([]);
   const [sortByVoteOrder, setSortByVotesOrder] = useState("asc");
   const [sortByDateOrder, setSortByDateOrder] = useState("asc");
@@ -10,8 +10,11 @@ const HomePage = ({ data }) => {
   const [newestBtnClicked, setNewestBtnClicked] = useState(false);
 
   useEffect(() => {
-    setPosts(data);
-  }, [data]);
+    const filteredData = data.filter((post) =>
+      post.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setPosts(filteredData);
+  }, [data, searchQuery]);
 
   // handle vote sorting
   const handleSortByVotes = () => {

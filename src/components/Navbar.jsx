@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "../assets/Navbar.css";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ handleChange }) => {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -17,8 +17,13 @@ const Navbar = () => {
               type="search"
               placeholder="Search"
               aria-label="Search"
+              onChange={handleChange}
             />
-            <button className="btn btn-outline-success" type="submit">
+            <button
+              className="btn btn-outline-success"
+              type="submit"
+              onClick={handleChange}
+            >
               Search
             </button>
           </form>
