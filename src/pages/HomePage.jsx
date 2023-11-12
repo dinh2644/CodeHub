@@ -72,14 +72,21 @@ const HomePage = ({ data, searchQuery }) => {
             </button>
           </div>
         </div>
-        {posts &&
+        {posts.length !== 0 ? (
           posts.map((post, index) => (
             <div className="row" key={index}>
               <div className="col">
                 <Card data={post} />
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <div className="row">
+            <div className="col">
+              <p>No results found for your search.</p>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

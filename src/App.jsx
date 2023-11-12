@@ -39,10 +39,9 @@ const App = () => {
   }, []);
 
   // handle search
-  const handleChange = (e) => {
-    setQuery(e.target.value);
+  const handleSearch = (searchQuery) => {
+    setQuery(searchQuery);
   };
-  console.log(query);
 
   return (
     <>
@@ -52,7 +51,7 @@ const App = () => {
             path="/"
             element={
               <>
-                <Navbar handleChange={handleChange} />
+                <Navbar handleChange={handleSearch} />
                 <Outlet />
               </>
             }
@@ -62,7 +61,7 @@ const App = () => {
               element={<HomePage data={posts} searchQuery={query} />}
             />
             <Route path="/askquestion" element={<CreatePage />} />
-            <Route path="/update" element={<UpdatePage />} />
+            <Route path="/update/:id" element={<UpdatePage data={posts} />} />
             <Route path="/:id" element={<DetailedPage data={posts} />} />
           </Route>
           {/* Handle unknown URLs */}

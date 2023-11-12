@@ -6,6 +6,8 @@ import UploadImage from "../components/UploadImage";
 const CreatePage = () => {
   const [titleIsEmpty, setTitleIsEmpty] = useState(true);
   const [post, setPost] = useState({ title: "", details: "", code: "" });
+
+  // handle input change
   const handleChange = (event) => {
     const { name, value } = event.target;
     setPost((prev) => {
@@ -23,13 +25,17 @@ const CreatePage = () => {
     }
   };
 
-  const handleSubmit = async () => {
+  // create post
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const { error } = await supabase.from("Posts").insert([post]);
     if (error) {
       console.error(error);
+    } else {
+      window.location = "/";
     }
   };
-  console.log(post);
+
   return (
     <>
       <div className="container">
@@ -48,10 +54,6 @@ const CreatePage = () => {
                   onChange={handleChange}
                   value={post.title}
                 />
-                <div className="form-text">
-                  Be specific and imagine you’re asking a question to another
-                  person.
-                </div>
               </div>
               <div className="mb-3">
                 <label htmlFor="details" className="form-label">
@@ -66,10 +68,14 @@ const CreatePage = () => {
                   value={post.details}
                   disabled={titleIsEmpty}
                 />
+                <div className="form-text">
+                  Be specific and imagine you’re asking a question to another
+                  person.
+                </div>
               </div>
               <div className="mb-3">
                 <label htmlFor="details" className="form-label">
-                  Code:
+                  Paste Your Code:
                 </label>
                 <textarea
                   type="text"

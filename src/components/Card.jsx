@@ -59,7 +59,7 @@ const Card = ({ data }) => {
           <div className="card-body">
             <div className="mt-1 mb-3">Posted {formattedDate}</div>
             <h4 className="card-title">{data.title}</h4>
-            <p className="text-muted">{data.details}</p>
+
             <div className="mt-3 mb-1">
               <span>{data.votes} Votes</span> {""}
               <span>{repliesCount} Replies</span>

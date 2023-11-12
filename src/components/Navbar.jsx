@@ -3,6 +3,16 @@ import "../assets/Navbar.css";
 import { Link } from "react-router-dom";
 
 const Navbar = ({ handleChange }) => {
+  const [search, setSearch] = useState("");
+
+  const handleInputChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    handleChange(search);
+  };
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -17,12 +27,12 @@ const Navbar = ({ handleChange }) => {
               type="search"
               placeholder="Search"
               aria-label="Search"
-              onChange={handleChange}
+              onChange={handleInputChange}
             />
             <button
               className="btn btn-outline-success"
               type="submit"
-              onClick={handleChange}
+              onClick={handleButtonClick}
             >
               Search
             </button>

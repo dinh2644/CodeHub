@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import "../assets/DetailedPage.css";
 import { supabase } from "../client";
 import CommentsSection from "../components/CommentsSection";
+import { Link } from "react-router-dom";
 
 const DetailedPage = ({ data }) => {
   const { id } = useParams();
@@ -65,6 +66,20 @@ const DetailedPage = ({ data }) => {
   const date = new Date(originalDate);
   const formattedDate = date.toLocaleString();
 
+  // handle delete post
+  const handleDelete = async (event) => {
+    event.preventDefault();
+
+    try {
+      await supabase.from("Posts").delete().eq("id", id);
+      await supabase.from("Comments").delete().eq("post_id", id);
+    } catch (error) {
+      console.error("Error deleting post and comments:", error);
+    }
+
+    window.location = "/";
+  };
+
   return (
     <>
       <div className="container detailedPageContainer">
@@ -74,14 +89,21 @@ const DetailedPage = ({ data }) => {
           </div>
         </div>
         <div className="row mb-2">
-          <div className="col">
-            <p className="text-muted" style={{ fontSize: "14px" }}>
+          <div className="col d-flex justify-content-between align-items-center">
+            <span className="text-muted" style={{ fontSize: "14px" }}>
               Asked on {formattedDate}
-            </p>
-            <hr />
+            </span>
+            <span style={{ fontSize: "14px" }}>
+              <Link className="btn btn-primary" to={`/update/${post?.id}`}>
+                Edit Post
+              </Link>
+              <button className="btn btn-danger" onClick={handleDelete}>
+                Delete Post
+              </button>
+            </span>
           </div>
+          <hr />
         </div>
-
         <div className="row">
           <div className="col-1 d-flex flex-column align-items-center voteCell">
             <span
