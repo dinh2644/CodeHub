@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../assets/CreatePage.css";
 import { supabase } from "../client";
 import UploadImage from "../components/UploadImage";
+import { v4 as uuidv4 } from "uuid";
 
 const CreatePage = () => {
   const [titleIsEmpty, setTitleIsEmpty] = useState(true);
@@ -26,13 +27,16 @@ const CreatePage = () => {
   };
 
   // create post
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { error } = await supabase.from("Posts").insert([post]);
-    if (error) {
+  const handleSubmit = async (image) => {
+    try {
+      const fileName = `images/avatar_${uuidv4()}.png`;
+      await supabase.from("Posts").insert([post]);
+      await supabase.storage.from("uploads").upload(fileName, image, {
+        cacheControl: "3600",
+        upsert: false,
+      });
+    } catch (error) {
       console.error(error);
-    } else {
-      window.location = "/";
     }
   };
 
@@ -88,6 +92,7 @@ const CreatePage = () => {
                   rows={10}
                 ></textarea>
               </div>
+              <UploadImage handleFile={handleSubmit} />
 
               <button
                 type="submit"
