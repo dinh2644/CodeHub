@@ -7,6 +7,8 @@ const UpdatePage = ({ data }) => {
   const { id } = useParams();
   const post = data.find((item) => String(item.id) === String(id));
   const [titleIsEmpty, setTitleIsEmpty] = useState(true);
+  const [validKey, setValidKey] = useState("");
+  const [action, setAction] = useState(null);
 
   // hold information for new updated inputs
   const [editedPost, setEditedPost] = useState({
@@ -68,6 +70,18 @@ const UpdatePage = ({ data }) => {
     window.location = "/";
   };
 
+  // handle secret key
+  const handleSecretKey = () => {
+    const isValid = validKey === post.secret_key;
+    if (isValid) {
+      if (action === "submit") {
+        handleSubmit();
+      } else {
+        handleDelete();
+      }
+    }
+  };
+
   return (
     <>
       <div className="container">
@@ -85,7 +99,7 @@ const UpdatePage = ({ data }) => {
                   name="title"
                   onChange={handleChange}
                   value={editedPost.title}
-                  placeholder={post.title}
+                  placeholder={post?.title}
                 />
               </div>
               <div className="mb-3">
@@ -100,7 +114,7 @@ const UpdatePage = ({ data }) => {
                   onChange={handleChange}
                   value={editedPost.details}
                   disabled={titleIsEmpty}
-                  placeholder={post.details}
+                  placeholder={post?.details}
                 />
                 <div className="form-text">
                   Be specific and imagine you’re asking a question to another
@@ -118,27 +132,77 @@ const UpdatePage = ({ data }) => {
                   name="code"
                   onChange={handleChange}
                   value={editedPost.code}
-                  placeholder={post.code}
+                  placeholder={post?.code}
                   cols={30}
                   rows={10}
                 ></textarea>
               </div>
 
               <button
-                type="submit"
                 className="btn btn-primary"
                 style={{ marginRight: "10px" }}
-                onClick={handleSubmit}
+                //onClick={() => setAction("submit")}
+                // data-bs-toggle="modal"
+                // data-bs-target="#modal"
               >
                 Update
               </button>
               <button
-                type="submit"
                 className="btn btn-danger"
-                onClick={handleDelete}
+                //onClick={() => setAction("delete")}
+                data-bs-toggle="modal"
+                data-bs-target="#modal"
               >
                 Delete
               </button>
+              {/* Edit/Delete Button Modal */}
+              <div
+                className="modal fade"
+                id="modal"
+                tabIndex={-1}
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="exampleModalLabel">
+                        Enter Secret Key
+                      </h5>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div className="modal-body">
+                      <input
+                        type="text"
+                        onChange={(e) => setValidKey(e.target.value)}
+                        style={{ background: "white", color: "black" }}
+                      />
+                    </div>
+                    <div className="modal-footer">
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={handleSecretKey}
+                      >
+                        Confirm
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* End modal */}
             </form>
           </div>
         </div>

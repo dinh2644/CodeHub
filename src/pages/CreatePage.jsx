@@ -11,6 +11,7 @@ const CreatePage = () => {
     details: "",
     code: "",
     image: "",
+    secret_key: "",
   });
 
   // handle input change
@@ -31,46 +32,36 @@ const CreatePage = () => {
     }
   };
 
-  // handle image upload
-  const handleImageUpload = async (image) => {
-    try {
-      // upload image first to storage
-      const fileName = `images/${uuidv4()}.png`;
-      await supabase.storage.from("uploads").upload(fileName, image, {
-        cacheControl: "3600",
-        upsert: false,
-      });
+  // handle image change
+  const handleImageChange = async (image) => {
+    // upload image first to storage
+    const fileName = `images/${uuidv4()}.png`;
+    await supabase.storage.from("uploads").upload(fileName, image, {
+      cacheControl: "3600",
+      upsert: false,
+    });
 
-      // get public url of that image
-      const { data: imageURL } = supabase.storage
-        .from("uploads")
-        .getPublicUrl(fileName);
+    // get public url of that image
+    const { data: imageURL } = supabase.storage
+      .from("uploads")
+      .getPublicUrl(fileName);
 
-      // extract url
-      const imageUrl = imageURL?.publicUrl;
+    // extract url
+    const imageUrl = imageURL?.publicUrl;
 
-      // update state with the image URL
-      setPost((prev) => ({
-        ...prev,
-        image: imageUrl,
-      }));
-    } catch (error) {
-      console.error(error);
-    }
+    // update state with the image URL
+    setPost((prev) => ({
+      ...prev,
+      image: imageUrl,
+    }));
   };
 
   // create post
-  const handleSubmit = async () => {
-    // call image upload
-    handleImageUpload();
-    // create post as well as insert the image URL
-    const { error } = await supabase.from("Posts").insert([post]);
-
-    if (error) {
-      console.error(error);
-    }
+  const handleSubmit = async (image) => {
+    // CREATE POST
+    await supabase.from("Posts").insert([post]);
   };
-  console.log(post.image);
+  console.log(post);
   return (
     <>
       <div className="container">
@@ -123,7 +114,29 @@ const CreatePage = () => {
                   rows={10}
                 ></textarea>
               </div>
-              <UploadImage handleFile={handleImageUpload} />
+              <UploadImage handleFile={handleImageChange} />
+
+              <div className="mb-3">
+                <label
+                  htmlFor="secret_key"
+                  className="form-label"
+                  style={{ marginRight: "5px" }}
+                >
+                  Enter secret key:
+                </label>
+                <input
+                  type="text"
+                  id="secret_key"
+                  style={{
+                    background: "white",
+                    color: "black",
+                    textDecoration: "none",
+                  }}
+                  name="secret_key"
+                  onChange={handleChange}
+                  value={post.secret_key}
+                />
+              </div>
 
               <button
                 type="submit"
