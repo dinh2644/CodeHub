@@ -1,10 +1,15 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --body_background: white;
+  --navbar_background: #f8f9fa;
+  --body_color: black;
+  --link_color: navy;
+  --card_background: #ffffff;
 }
 
-body {
-  min-height: 100vh;
+[data-theme="dark"] {
+  --body_background: #343541;
+  --navbar_background: purple;
+  --body_color: white;
+  --link_color: cyan;
+  --card_background: #2d2d2d;
 }

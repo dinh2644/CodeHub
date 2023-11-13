@@ -1,21 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../assets/Navbar.css";
 import { Link } from "react-router-dom";
+import DarkMode from "./DarkMode";
 
 const Navbar = ({ handleChange }) => {
   const [search, setSearch] = useState("");
 
+  // handle search bar from home page
   const handleInputChange = (e) => {
     setSearch(e.target.value);
   };
-
   const handleButtonClick = (e) => {
     e.preventDefault();
     handleChange(search);
   };
+
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg ">
         <div className="container navContainer">
           {/* Logo */}
           <Link className="navbar-brand item" to={"/"}>
@@ -54,6 +56,7 @@ const Navbar = ({ handleChange }) => {
             </ul>
           </div>
         </div>
+        <DarkMode />
       </nav>
     </>
   );
