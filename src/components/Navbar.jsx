@@ -17,10 +17,11 @@ const Navbar = ({ handleChange }) => {
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container navContainer">
+          {/* Logo */}
           <Link className="navbar-brand item" to={"/"}>
             Stack Underflow
           </Link>
-
+          {/* Search bar */}
           <form className="item d-flex" id="myform">
             <input
               className="form-control"
@@ -37,6 +38,7 @@ const Navbar = ({ handleChange }) => {
               Search
             </button>
           </form>
+          {/* Home & Ask Question Buttons */}
           <div className="item hide-on-mobile">
             <ul className="navbar-nav">
               <li className="nav-item">

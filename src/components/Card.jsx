@@ -5,7 +5,10 @@ import { supabase } from "../client.js";
 
 const Card = ({ data }) => {
   const [repliesCount, setRepliesCount] = useState(0);
-  const [createdAt, setCreatedAt] = useState("");
+  const [hasCode, setHasCode] = useState(false);
+  const [hasImage, setHasImage] = useState(false);
+
+  // fetch replies count manually
   useEffect(() => {
     const fetchRepliesCount = async () => {
       const { data: commentsData, error } = await supabase
@@ -17,13 +20,13 @@ const Card = ({ data }) => {
         console.error(error);
       } else {
         setRepliesCount(commentsData.length);
-        setCreatedAt(data.createdAt);
+        checkForImageOrCode();
       }
     };
     fetchRepliesCount();
   }, []);
 
-  // get post's age
+  // get post's age from creation
   const getTimeAgoString = (createdAt) => {
     const currentDate = new Date();
     const createdAtDate = new Date(createdAt);
@@ -50,6 +53,15 @@ const Card = ({ data }) => {
   const originalDate = data ? String(data.created_at) : "";
   const formattedDate = getTimeAgoString(originalDate);
 
+  // check if card has image or code
+  const checkForImageOrCode = () => {
+    const containsImage = data.image !== null && data.image !== "";
+    const containsCode = data.code !== null && data.code !== "";
+
+    setHasImage(containsImage);
+    setHasCode(containsCode);
+  };
+
   return (
     <>
       <div className="card" style={{ width: "80rem" }}>
@@ -58,7 +70,27 @@ const Card = ({ data }) => {
           style={{ textDecoration: "none", color: "black" }}
         >
           <div className="card-body">
-            <div className="mt-1 mb-3">Posted {formattedDate}</div>
+            <div className="d-flex justify-content-between">
+              <div className="mt-1 mb-3">Posted {formattedDate}</div>
+              <div className="mt-1 mb-3 d-flex">
+                <div
+                  className="hasCodeBox"
+                  style={{ display: hasCode ? "" : "none" }}
+                >
+                  Has Code
+                </div>
+                <div
+                  className="hasImageBox"
+                  style={{
+                    display: hasImage ? "" : "none",
+                    marginLeft: "5px",
+                  }}
+                >
+                  Has Image
+                </div>
+              </div>
+            </div>
+
             <h4 className="card-title">{data.title}</h4>
 
             <div className="mt-3 mb-1">

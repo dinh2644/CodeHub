@@ -57,11 +57,18 @@ const CreatePage = () => {
   };
 
   // create post
-  const handleSubmit = async (image) => {
-    // CREATE POST
-    await supabase.from("Posts").insert([post]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const { error } = await supabase.from("Posts").insert([post]);
+
+    if (error) {
+      console.error(error);
+    } else {
+      window.location = "/";
+    }
   };
-  console.log(post);
+
   return (
     <>
       <div className="container">
@@ -122,7 +129,7 @@ const CreatePage = () => {
                   className="form-label"
                   style={{ marginRight: "5px" }}
                 >
-                  Enter secret key:
+                  Enter Secret Key:
                 </label>
                 <input
                   type="text"

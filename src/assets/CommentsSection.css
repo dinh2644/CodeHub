@@ -3,20 +3,44 @@ hr {
 }
 
 .comment-section {
+  position: relative;
   display: block;
   max-height: 150px;
-  overflow-y: auto;
+  overflow: auto;
   width: 100%;
   padding: 0.25rem;
   background-color: #ffeeee;
   border: 1px solid #dee2e6;
   color: black !important;
 }
-
 .comment-divider {
   width: 100%;
   margin: 10px 0;
 }
 
-.content {
+.deleteText {
+  display: flex;
+  justify-content: center;
+}
+
+.hiddenInput {
+  position: relative;
+  left: 440px;
+}
+
+.delete-button {
+  position: absolute;
+  top: 50%;
+  left: 96%;
+  transform: translate(-50%, -50%);
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  display: none;
+}
+
+.comment-section:hover .delete-button {
+  display: block;
 }

@@ -15,7 +15,7 @@ const UploadImage = ({ handleFile }) => {
   return (
     <div className="mb-3">
       <label htmlFor="file" style={{ marginRight: ".5rem" }}>
-        Have an image instead?
+        Have an image to upload?
       </label>
       <button
         type="button"

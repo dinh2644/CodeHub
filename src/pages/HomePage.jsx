@@ -9,6 +9,7 @@ const HomePage = ({ data, searchQuery }) => {
   const [popularBtnClicked, setPopularBtnClicked] = useState(false);
   const [newestBtnClicked, setNewestBtnClicked] = useState(false);
 
+  // load data depending on whats in search bar
   useEffect(() => {
     const filteredData = data.filter((post) =>
       post.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -81,6 +82,7 @@ const HomePage = ({ data, searchQuery }) => {
             </div>
           ))
         ) : (
+          // display if search bar cant find anything
           <div className="row">
             <div className="col">
               <p>No results found for your search.</p>

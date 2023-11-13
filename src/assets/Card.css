@@ -1,0 +1,11 @@
+.hasCodeBox {
+  background-color: #f9f3cc;
+  padding: 5px;
+  color: black;
+}
+
+.hasImageBox {
+  background-color: #d7e5ca;
+  padding: 5px;
+  color: black;
+}

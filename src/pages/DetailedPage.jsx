@@ -3,15 +3,19 @@ import { useParams } from "react-router-dom";
 import "../assets/DetailedPage.css";
 import { supabase } from "../client";
 import CommentsSection from "../components/CommentsSection";
-import { Link } from "react-router-dom";
 
 const DetailedPage = ({ data }) => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [count, setCount] = useState(0);
-  const [comment, setComment] = useState({ content: "", post_id: 0 });
+  const [comment, setComment] = useState({
+    content: "",
+    post_id: 0,
+    secret_key: "",
+  });
   const [validKey, setValidKey] = useState("");
   const [commentsCount, setCommentsCount] = useState(0);
+  const [actionKey, setActionKey] = useState(null);
 
   // retrieve current single post and its amount of votes
   useEffect(() => {
@@ -77,10 +81,13 @@ const DetailedPage = ({ data }) => {
   };
 
   // post comment
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const { error } = await supabase.from("Comments").insert([comment]);
     if (error) {
       console.error(error);
+    } else {
+      window.location = `/${id}`;
     }
   };
 
@@ -105,7 +112,12 @@ const DetailedPage = ({ data }) => {
   const handleSecretKey = () => {
     const isValid = validKey === post.secret_key;
     if (isValid) {
-      handleDelete();
+      if (actionKey == "submit") {
+        window.location = `/update/${post?.id}`;
+      }
+      if (actionKey == "delete") {
+        handleDelete();
+      }
     }
   };
 
@@ -125,18 +137,23 @@ const DetailedPage = ({ data }) => {
               Asked on {formattedDate}
             </span>
             <span style={{ fontSize: "14px" }}>
-              <Link className="btn btn-primary" to={`/update/${post?.id}`}>
+              <button
+                className="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#modal"
+                onClick={() => setActionKey("submit")}
+              >
                 Edit Post
-              </Link>
+              </button>
               <button
                 className="btn btn-danger"
                 data-bs-toggle="modal"
                 data-bs-target="#modal"
+                onClick={() => setActionKey("delete")}
               >
                 Delete Post
               </button>
-              {/* Edit/Delete Button Modal */}
-
+              {/* Delete Button Modal */}
               <div
                 className="modal fade"
                 id="modal"
@@ -239,20 +256,35 @@ const DetailedPage = ({ data }) => {
                 </h3>
 
                 <textarea
-                  className="form-control"
+                  className="form-control mb-2"
                   name="content"
                   id="content"
                   cols="30"
                   rows="10"
                   value={comment.content}
                   onChange={handleChange}
+                  placeholder="Be nice!"
                 ></textarea>
-                <div className="form-text">Be nice!</div>
+
+                <input
+                  style={{
+                    fontSize: "15px",
+                    width: "15rem",
+                    background: "white",
+                    color: "black",
+                  }}
+                  type="text"
+                  placeholder="Set a secret key for your comment!"
+                  id="secret_key"
+                  name="secret_key"
+                  onChange={handleChange}
+                  value={comment.secret_key}
+                />
               </div>
 
               <button
                 type="submit"
-                className="btn postAnswerBtn"
+                className="btn postAnswerBtn mb-5"
                 onClick={handleSubmit}
               >
                 Post Your Answer
