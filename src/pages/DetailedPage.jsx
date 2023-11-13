@@ -4,7 +4,7 @@ import "../assets/DetailedPage.css";
 import { supabase } from "../client";
 import CommentsSection from "../components/CommentsSection";
 
-const DetailedPage = ({ data }) => {
+const DetailedPage = ({ data, userId }) => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [count, setCount] = useState(0);
@@ -16,6 +16,7 @@ const DetailedPage = ({ data }) => {
   const [validKey, setValidKey] = useState("");
   const [commentsCount, setCommentsCount] = useState(0);
   const [actionKey, setActionKey] = useState(null);
+  const [hasDownVoted, setHasDownVoted] = useState(false);
 
   // retrieve current single post and its amount of votes
   useEffect(() => {
@@ -53,9 +54,18 @@ const DetailedPage = ({ data }) => {
     fetchCommentsForPost();
   }, []);
 
-  // update post's vote count
+  // update vote count
   const updateVote = async (voteType) => {
-    const newCount = voteType === "up" ? count + 1 : count - 1;
+    //const newCount = voteType === "up" ? count + 1 : count - 1;
+    let newCount = count;
+    if (voteType === "up") {
+      newCount = count + 1;
+      setHasDownVoted(false);
+    }
+    if (voteType === "down" && hasDownVoted === false) {
+      newCount = count - 1;
+      setHasDownVoted(true);
+    }
     const { error } = await supabase
       .from("Posts")
       .update({ votes: newCount })
@@ -246,7 +256,7 @@ const DetailedPage = ({ data }) => {
             <h3>{commentsCount} Comments</h3>
           </div>
         </div>
-        <CommentsSection postID={id} />
+        <CommentsSection postID={id} userId={userId} />
         <div className="row">
           <div className="col">
             <form id="myform">

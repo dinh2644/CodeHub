@@ -3,10 +3,11 @@ import "../assets/Card.css";
 import { Link } from "react-router-dom";
 import { supabase } from "../client.js";
 
-const Card = ({ data }) => {
+const Card = ({ data, userId }) => {
   const [repliesCount, setRepliesCount] = useState(0);
   const [hasCode, setHasCode] = useState(false);
   const [hasImage, setHasImage] = useState(false);
+  const [hasNoImageOrCode, setHasNoImageOrCode] = useState(false);
 
   // fetch replies count manually
   useEffect(() => {
@@ -57,9 +58,11 @@ const Card = ({ data }) => {
   const checkForImageOrCode = () => {
     const containsImage = data.image !== null && data.image !== "";
     const containsCode = data.code !== null && data.code !== "";
+    const containsNothing = !containsImage && !containsCode;
 
     setHasImage(containsImage);
     setHasCode(containsCode);
+    setHasNoImageOrCode(containsNothing);
   };
 
   return (
@@ -87,6 +90,15 @@ const Card = ({ data }) => {
                   }}
                 >
                   Has Image
+                </div>
+                <div
+                  className="generalDicussionBox"
+                  style={{
+                    display: hasNoImageOrCode ? "" : "none",
+                    marginLeft: "5px",
+                  }}
+                >
+                  General Disucssion
                 </div>
               </div>
             </div>

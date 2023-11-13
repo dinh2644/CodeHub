@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../assets/HomePage.css";
 import Card from "../components/Card";
 
-const HomePage = ({ data, searchQuery }) => {
+const HomePage = ({ data, searchQuery, userId }) => {
   const [posts, setPosts] = useState([]);
   const [sortByVoteOrder, setSortByVotesOrder] = useState("asc");
   const [sortByDateOrder, setSortByDateOrder] = useState("asc");
@@ -13,7 +13,7 @@ const HomePage = ({ data, searchQuery }) => {
   // load data depending on whats in search bar
   useEffect(() => {
     const filteredData = data.filter((post) =>
-      post.title.toLowerCase().includes(searchQuery.toLowerCase())
+      String(post.title).toLowerCase().includes(searchQuery.toLowerCase())
     );
     setPosts(filteredData);
   }, [data, searchQuery]);
@@ -57,11 +57,14 @@ const HomePage = ({ data, searchQuery }) => {
     if (selectedTags) {
       const containsImage = data.image !== null && data.image !== "";
       const containsCode = data.code !== null && data.code !== "";
+      const containsNothing = !containsImage && !containsCode;
 
       if (selectedTags === "code") {
         return containsCode;
       } else if (selectedTags === "image") {
         return containsImage;
+      } else if (selectedTags === "general") {
+        return containsNothing;
       }
     }
   });
@@ -98,6 +101,7 @@ const HomePage = ({ data, searchQuery }) => {
               <option value="">All Posts</option>
               <option value="code">With Code</option>
               <option value="image">With Image</option>
+              <option value="general">General Discussion</option>
             </select>
           </div>
         </div>
@@ -105,7 +109,7 @@ const HomePage = ({ data, searchQuery }) => {
           displayedPosts.map((post, index) => (
             <div className="row" key={index}>
               <div className="col">
-                <Card data={post} />
+                <Card data={post} userId={userId} />
               </div>
             </div>
           ))

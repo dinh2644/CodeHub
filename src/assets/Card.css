@@ -10,6 +10,12 @@
   color: black;
 }
 
+.generalDicussionBox{
+  background-color: #DDDDDD;
+  padding: 5px;
+  color: black;
+}
+
 .card {
   background-color: var(--card_background);
 }
