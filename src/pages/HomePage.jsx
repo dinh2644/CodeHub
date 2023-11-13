@@ -8,6 +8,7 @@ const HomePage = ({ data, searchQuery }) => {
   const [sortByDateOrder, setSortByDateOrder] = useState("asc");
   const [popularBtnClicked, setPopularBtnClicked] = useState(false);
   const [newestBtnClicked, setNewestBtnClicked] = useState(false);
+  const [selectedTags, setSelectedTags] = useState("");
 
   // load data depending on whats in search bar
   useEffect(() => {
@@ -51,6 +52,22 @@ const HomePage = ({ data, searchQuery }) => {
     setNewestBtnClicked(!newestBtnClicked);
   };
 
+  // filter post by tags
+  const filteredByTags = posts.filter((data) => {
+    if (selectedTags) {
+      const containsImage = data.image !== null && data.image !== "";
+      const containsCode = data.code !== null && data.code !== "";
+
+      if (selectedTags === "code") {
+        return containsCode;
+      } else if (selectedTags === "image") {
+        return containsImage;
+      }
+    }
+  });
+
+  const displayedPosts = filteredByTags.length > 0 ? filteredByTags : posts;
+
   return (
     <>
       <div className="container">
@@ -72,9 +89,20 @@ const HomePage = ({ data, searchQuery }) => {
               Most Popular
             </button>
           </div>
+          <div className="col mt-4 mb-4">
+            <select
+              className="form-select"
+              aria-label="Default select example"
+              onChange={(e) => setSelectedTags(e.target.value)}
+            >
+              <option value="">All Posts</option>
+              <option value="code">With Code</option>
+              <option value="image">With Image</option>
+            </select>
+          </div>
         </div>
-        {posts.length !== 0 ? (
-          posts.map((post, index) => (
+        {Array.isArray(displayedPosts) && displayedPosts.length !== 0 ? (
+          displayedPosts.map((post, index) => (
             <div className="row" key={index}>
               <div className="col">
                 <Card data={post} />

@@ -24,7 +24,7 @@ const Card = ({ data }) => {
       }
     };
     fetchRepliesCount();
-  }, []);
+  }, [data]);
 
   // get post's age from creation
   const getTimeAgoString = (createdAt) => {
