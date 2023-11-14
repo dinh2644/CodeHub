@@ -4,7 +4,7 @@ import "../assets/DetailedPage.css";
 import { supabase } from "../client";
 import CommentsSection from "../components/CommentsSection";
 
-const DetailedPage = ({ data, userId }) => {
+const DetailedPage = ({ data }) => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [count, setCount] = useState(0);
@@ -256,7 +256,7 @@ const DetailedPage = ({ data, userId }) => {
             <h3>{commentsCount} Comments</h3>
           </div>
         </div>
-        <CommentsSection postID={id} userId={userId} />
+        <CommentsSection postID={id} />
         <div className="row">
           <div className="col">
             <form id="myform">

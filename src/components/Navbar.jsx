@@ -56,8 +56,10 @@ const Navbar = ({ handleChange }) => {
             </ul>
           </div>
         </div>
-        <DarkMode />
       </nav>
+      <div style={{ float: "right" }}>
+        <DarkMode />
+      </div>
     </>
   );
 };

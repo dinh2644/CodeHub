@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "../assets/CommentsSection.css";
 import { supabase } from "../client";
 
-const CommentsSection = ({ postID, userId }) => {
+const CommentsSection = ({ postID }) => {
   const [comment, setComment] = useState([]);
   const [validKey, setValidKey] = useState("");
 

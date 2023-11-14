@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../assets/HomePage.css";
 import Card from "../components/Card";
 
-const HomePage = ({ data, searchQuery, userId }) => {
+const HomePage = ({ data, searchQuery }) => {
   const [posts, setPosts] = useState([]);
   const [sortByVoteOrder, setSortByVotesOrder] = useState("asc");
   const [sortByDateOrder, setSortByDateOrder] = useState("asc");
@@ -109,7 +109,7 @@ const HomePage = ({ data, searchQuery, userId }) => {
           displayedPosts.map((post, index) => (
             <div className="row" key={index}>
               <div className="col">
-                <Card data={post} userId={userId} />
+                <Card data={post} />
               </div>
             </div>
           ))

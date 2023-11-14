@@ -3,7 +3,7 @@ import "../assets/Card.css";
 import { Link } from "react-router-dom";
 import { supabase } from "../client.js";
 
-const Card = ({ data, userId }) => {
+const Card = ({ data }) => {
   const [repliesCount, setRepliesCount] = useState(0);
   const [hasCode, setHasCode] = useState(false);
   const [hasImage, setHasImage] = useState(false);
