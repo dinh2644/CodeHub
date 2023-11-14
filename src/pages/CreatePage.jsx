@@ -5,7 +5,6 @@ import UploadImage from "../components/UploadImage";
 import { v4 as uuidv4 } from "uuid";
 
 const CreatePage = () => {
-  const [titleIsEmpty, setTitleIsEmpty] = useState(true);
   const [post, setPost] = useState({
     title: "",
     details: "",
@@ -23,13 +22,6 @@ const CreatePage = () => {
         [name]: value,
       };
     });
-    if (name === "title") {
-      if (value !== "") {
-        setTitleIsEmpty(false);
-      } else {
-        setTitleIsEmpty(true);
-      }
-    }
   };
 
   // handle image change
@@ -73,7 +65,7 @@ const CreatePage = () => {
     <>
       <div className="container">
         <div className="row">
-          <div className="col">
+          <div className="col mt-3">
             <form id="myform">
               <div className="mb-3">
                 <label htmlFor="title" className="form-label">
@@ -99,7 +91,6 @@ const CreatePage = () => {
                   name="details"
                   onChange={handleChange}
                   value={post.details}
-                  disabled={titleIsEmpty}
                 />
                 <div className="form-text">
                   Be specific and imagine you’re asking a question to another
@@ -119,6 +110,7 @@ const CreatePage = () => {
                   value={post.code}
                   cols={30}
                   rows={10}
+                  placeholder="optional"
                 ></textarea>
               </div>
               <UploadImage handleFile={handleImageChange} />
@@ -134,6 +126,7 @@ const CreatePage = () => {
                 <input
                   type="text"
                   id="secret_key"
+                  className="keyBar"
                   style={{
                     background: "white",
                     color: "black",
@@ -145,11 +138,7 @@ const CreatePage = () => {
                 />
               </div>
 
-              <button
-                type="submit"
-                className="btn btn-primary"
-                onClick={handleSubmit}
-              >
+              <button type="submit" className="button-5" onClick={handleSubmit}>
                 Submit
               </button>
             </form>

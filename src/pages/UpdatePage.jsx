@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../assets/UpdatePage.css";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { supabase } from "../client";
 
 const UpdatePage = ({ data }) => {
   const { id } = useParams();
   const post = data.find((item) => String(item.id) === String(id));
-  const [titleIsEmpty, setTitleIsEmpty] = useState(true);
 
   // hold information for new updated inputs
   const [editedPost, setEditedPost] = useState({
@@ -24,13 +23,6 @@ const UpdatePage = ({ data }) => {
         [name]: value,
       };
     });
-    if (name === "title") {
-      if (value !== "") {
-        setTitleIsEmpty(false);
-      } else {
-        setTitleIsEmpty(true);
-      }
-    }
   };
 
   // handle edit post
@@ -99,7 +91,6 @@ const UpdatePage = ({ data }) => {
                   name="details"
                   onChange={handleChange}
                   value={editedPost.details}
-                  disabled={titleIsEmpty}
                   placeholder={post?.details}
                 />
                 <div className="form-text">
@@ -108,7 +99,7 @@ const UpdatePage = ({ data }) => {
                 </div>
               </div>
               <div className="mb-3">
-                <label htmlFor="details" className="form-label">
+                <label htmlFor="code" className="form-label">
                   Modify Code:
                 </label>
                 <textarea
@@ -125,15 +116,26 @@ const UpdatePage = ({ data }) => {
               </div>
 
               <button
-                className="btn btn-primary"
+                className="button-6"
                 style={{ marginRight: "10px" }}
                 onClick={handleSubmit}
               >
                 Update
               </button>
-              <button className="btn btn-danger" onClick={handleDelete}>
+              <button
+                className="button-6"
+                onClick={handleDelete}
+                style={{ background: "darkred", color: "white" }}
+              >
                 Delete
               </button>
+              <Link
+                className="button-6"
+                to={`/${id}`}
+                style={{ textDecoration: "none", marginLeft: "9px" }}
+              >
+                Cancel
+              </Link>
             </form>
           </div>
         </div>

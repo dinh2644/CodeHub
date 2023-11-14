@@ -1,39 +1,5 @@
-.button-upload {
-  cursor: pointer;
-  font: inherit;
-  min-height: 48px;
-  min-width: 48px;
-}
-
-.keyBar {
-  display: flex;
-  align-items: center;
-  width: 300px; /* Adjust the width as needed */
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.keyBar input[type="text"] {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  outline: none;
-}
-
-.keyBar button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-}
-
-.keyBar button:hover {
-  background-color: #0056b3;
-}
-
-.button-5 {
+/* CSS */
+.button-4 {
   appearance: none;
   background-color: #fafbfc;
   border: 1px solid rgba(27, 31, 35, 0.15);
@@ -46,7 +12,7 @@
   display: inline-block;
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 20px;
   list-style: none;
@@ -59,23 +25,35 @@
   vertical-align: middle;
   white-space: nowrap;
   word-wrap: break-word;
-  width: 7rem;
-  height: 3rem;
 }
 
-.button-5:hover {
+.button-4:hover {
+  background-color: #f3f4f6;
   text-decoration: none;
   transition-duration: 0.1s;
 }
 
-.button-5:focus {
+.button-4:disabled {
+  background-color: #fafbfc;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959da5;
+  cursor: default;
+}
+
+.button-4:active {
+  background-color: #edeff2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+.button-4:focus {
   outline: 1px transparent;
 }
 
-.button-5:before {
+.button-4:before {
   display: none;
 }
 
-.button-5:-webkit-details-marker {
+.button-4:-webkit-details-marker {
   display: none;
 }

@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-//import { supabase } from "../client";
+import "../assets/UploadImage.css";
 
 const UploadImage = ({ handleFile }) => {
   const hiddenFileInput = useRef(null);
@@ -19,7 +19,7 @@ const UploadImage = ({ handleFile }) => {
       </label>
       <button
         type="button"
-        className="button-upload"
+        className="button-upload button-4"
         onClick={handleImageUpload}
       >
         Upload Image

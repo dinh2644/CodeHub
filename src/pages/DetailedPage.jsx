@@ -136,19 +136,19 @@ const DetailedPage = ({ data }) => {
       <div className="container detailedPageContainer">
         {/* Title of post */}
         <div className="row">
-          <div className="col mt-2">
+          <div className="col mt-3 askedRow ">
             <h2>{post?.title}</h2>
           </div>
         </div>
         {/* Asked on & Edit and Delete buttons */}
         <div className="row mb-2">
-          <div className="col d-flex justify-content-between align-items-center">
+          <div className="col d-flex justify-content-between align-items-center askedRow mb-2">
             <span className="text-muted" style={{ fontSize: "14px" }}>
               Asked on {formattedDate}
             </span>
             <span style={{ fontSize: "14px" }}>
               <button
-                className="btn btn-primary"
+                className="button-4 mx-2"
                 data-bs-toggle="modal"
                 data-bs-target="#modal"
                 onClick={() => setActionKey("submit")}
@@ -156,7 +156,8 @@ const DetailedPage = ({ data }) => {
                 Edit Post
               </button>
               <button
-                className="btn btn-danger"
+                className="button-4"
+                style={{ background: "darkred", color: "white" }}
                 data-bs-toggle="modal"
                 data-bs-target="#modal"
                 onClick={() => setActionKey("delete")}
@@ -234,25 +235,29 @@ const DetailedPage = ({ data }) => {
               ⬇️
             </span>
           </div>
-          <div className="col-11 ">
+          <div className="col ">
             <h5 style={{ fontWeight: "500" }}>{post?.details}</h5>
             <pre>
-              <code>{post?.code}</code>
+              <code className="code">{post?.code}</code>
             </pre>
           </div>
         </div>
+
         {/* Image */}
-        <div className="row">
-          <div className="col">
-            <img src={post?.image} alt="" />
-          </div>
-        </div>
+        {post?.image && (
+          <>
+            <hr />
+            <div className="row">
+              <div className="col d-flex justify-content-center">
+                <img src={post?.image} alt="user's custom image" />
+              </div>
+            </div>
+          </>
+        )}
+
         {/* Comment section */}
         <div className="row">
-          <div className="col mt-4">
-            <h5 className="me-2 " style={{ fontWeight: "400" }}>
-              {} Answers
-            </h5>
+          <div className="col">
             <h3>{commentsCount} Comments</h3>
           </div>
         </div>
@@ -279,14 +284,16 @@ const DetailedPage = ({ data }) => {
                 <input
                   style={{
                     fontSize: "15px",
-                    width: "15rem",
+                    width: "10rem",
                     background: "white",
                     color: "black",
+                    padding: "8px",
                   }}
                   type="text"
-                  placeholder="Set a secret key for your comment!"
+                  placeholder="Set a Secret Key"
                   id="secret_key"
                   name="secret_key"
+                  className="keyBar"
                   onChange={handleChange}
                   value={comment.secret_key}
                 />
@@ -294,8 +301,9 @@ const DetailedPage = ({ data }) => {
 
               <button
                 type="submit"
-                className="btn postAnswerBtn mb-5"
+                className="button-4 mb-5"
                 onClick={handleSubmit}
+                style={{ width: "10rem", height: "3rem" }}
               >
                 Post Your Answer
               </button>
