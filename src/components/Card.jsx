@@ -67,15 +67,15 @@ const Card = ({ data }) => {
 
   return (
     <>
-      <div className="card" style={{ width: "80rem" }}>
+      <div className="card" style={{ width: "81rem" }}>
         <Link
           to={`${data.id}`}
           style={{ textDecoration: "none", color: "black" }}
         >
           <div className="card-body">
             <div className="d-flex justify-content-between">
-              <div className="mt-1 mb-3">Posted {formattedDate}</div>
-              <div className="mt-1 mb-3 d-flex">
+              <div className="mt-1">Posted {formattedDate}</div>
+              <div className="mt-1 d-flex">
                 <div
                   className="hasCodeBox"
                   style={{ display: hasCode ? "" : "none" }}

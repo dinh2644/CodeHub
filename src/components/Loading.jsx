@@ -4,7 +4,7 @@ import "../assets/loading.css";
 const Loading = () => {
   return (
     <div className="d-flex align-items-center justify-content-center vh-100">
-      <span class="loader"></span>
+      <span className="loader"></span>
     </div>
   );
 };

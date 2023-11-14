@@ -10,12 +10,22 @@
   color: black;
 }
 
-.generalDicussionBox{
-  background-color: #DDDDDD;
+.generalDicussionBox {
+  background-color: #dddddd;
   padding: 5px;
   color: black;
 }
 
 .card {
-  background-color: var(--card_background);
+  width: 400px;
+  margin-bottom: 20px;
+  padding: 0 20px 0 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

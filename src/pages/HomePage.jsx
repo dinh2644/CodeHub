@@ -75,26 +75,30 @@ const HomePage = ({ data, searchQuery }) => {
     <>
       <div className="container">
         <div className="row">
-          <div className="col mt-4 mb-4">
-            Order by{" "}
-            <button
-              className="mx-2 sortButtons"
-              onClick={handleSortByDate}
-              style={{ filter: newestBtnClicked ? "brightness(85%)" : "" }}
-            >
-              Newest
-            </button>
-            <button
-              onClick={handleSortByVotes}
-              style={{ filter: popularBtnClicked ? "brightness(85%)" : "" }}
-              className="sortButtons"
-            >
-              Most Popular
-            </button>
-          </div>
-          <div className="col mt-4 mb-4">
+          <div
+            className="col mt-4 mb-4 d-flex justify-content-between"
+            style={{ fontSize: "18px" }}
+          >
+            <div>
+              Order by{" "}
+              <button
+                className="mx-2 button-8 shadow-none"
+                onClick={handleSortByDate}
+                style={{ filter: newestBtnClicked ? "brightness(85%)" : "" }}
+              >
+                Newest
+              </button>
+              <button
+                onClick={handleSortByVotes}
+                style={{ filter: popularBtnClicked ? "brightness(85%)" : "" }}
+                className="button-8 shadow-none"
+              >
+                Most Popular
+              </button>
+            </div>
+
             <select
-              className="form-select"
+              className="form-select shadow-none"
               aria-label="Default select example"
               onChange={(e) => setSelectedTags(e.target.value)}
             >
