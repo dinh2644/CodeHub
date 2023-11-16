@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../assets/HomePage.css";
 import Card from "../components/Card";
+import RecentCard from "../components/RecentCard";
 
 const HomePage = ({ data, searchQuery }) => {
   const [posts, setPosts] = useState([]);
@@ -76,7 +77,7 @@ const HomePage = ({ data, searchQuery }) => {
       <div className="container">
         <div className="row">
           <div
-            className="col mt-4 mb-4 d-flex justify-content-between"
+            className="col-9 mt-4 mb-4 d-flex justify-content-between"
             style={{ fontSize: "18px" }}
           >
             <div>
@@ -96,7 +97,6 @@ const HomePage = ({ data, searchQuery }) => {
                 Most Popular
               </button>
             </div>
-
             <select
               className="form-select shadow-none"
               aria-label="Default select example"
@@ -108,23 +108,24 @@ const HomePage = ({ data, searchQuery }) => {
               <option value="general">General Discussion</option>
             </select>
           </div>
+          <div className="col-3"></div>
         </div>
-        {Array.isArray(displayedPosts) && displayedPosts.length !== 0 ? (
-          displayedPosts.map((post, index) => (
-            <div className="row" key={index}>
-              <div className="col">
+        <div className="row">
+          {Array.isArray(displayedPosts) && displayedPosts.length !== 0 ? (
+            displayedPosts.map((post, index) => (
+              <div className="col-12" key={index}>
                 <Card data={post} />
               </div>
+            ))
+          ) : (
+            // display if search bar cant find anything
+            <div className="row">
+              <div className="col">
+                <p>No results found for your search.</p>
+              </div>
             </div>
-          ))
-        ) : (
-          // display if search bar cant find anything
-          <div className="row">
-            <div className="col">
-              <p>No results found for your search.</p>
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </>
   );

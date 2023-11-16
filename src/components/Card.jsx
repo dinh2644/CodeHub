@@ -67,47 +67,51 @@ const Card = ({ data }) => {
 
   return (
     <>
-      <div className="card" style={{ width: "81rem" }}>
+      <div className="card" style={{ width: "60rem" }}>
         <Link
           to={`${data.id}`}
           style={{ textDecoration: "none", color: "black" }}
         >
           <div className="card-body">
-            <div className="d-flex justify-content-between">
-              <div className="mt-1">Posted {formattedDate}</div>
-              <div className="mt-1 d-flex">
-                <div
-                  className="hasCodeBox"
-                  style={{ display: hasCode ? "" : "none" }}
-                >
-                  Has Code
-                </div>
-                <div
-                  className="hasImageBox"
-                  style={{
-                    display: hasImage ? "" : "none",
-                    marginLeft: "5px",
-                  }}
-                >
-                  Has Image
-                </div>
-                <div
-                  className="generalDicussionBox"
-                  style={{
-                    display: hasNoImageOrCode ? "" : "none",
-                    marginLeft: "5px",
-                  }}
-                >
-                  General Disucssion
+            <div className="row">
+              <div className="col-6">
+                {/* Posted date */}
+                <div className="mt-2">Posted {formattedDate}</div>
+                {/* Title */}
+                <h4 className="card-title mt-2">{data.title}</h4>
+                {/* Tags */}
+                <div className="mt-3 mb-2 d-flex">
+                  <div
+                    className="hasCodeBox"
+                    style={{ display: hasCode ? "" : "none" }}
+                  >
+                    Has Code
+                  </div>
+                  <div
+                    className="hasImageBox"
+                    style={{
+                      display: hasImage ? "" : "none",
+                      marginLeft: "7px",
+                    }}
+                  >
+                    Has Image
+                  </div>
+                  <div
+                    className="generalDicussionBox"
+                    style={{
+                      display: hasNoImageOrCode ? "" : "none",
+                      marginLeft: "7px",
+                    }}
+                  >
+                    General Disucssion
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <h4 className="card-title">{data.title}</h4>
-
-            <div className="mt-3 mb-1">
-              <span>{data.votes} Votes</span> {""}
-              <span>{repliesCount} Replies</span>
+              {/* Votes/Replies */}
+              <div className="col-6 d-flex flex-column align-items-end justify-content-center">
+                <div>{data.votes} Votes</div> {""}
+                <div>{repliesCount} Replies</div>
+              </div>
             </div>
           </div>
         </Link>
