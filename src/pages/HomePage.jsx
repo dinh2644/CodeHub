@@ -10,6 +10,10 @@ const HomePage = ({ data, searchQuery }) => {
   const [popularBtnClicked, setPopularBtnClicked] = useState(false);
   const [newestBtnClicked, setNewestBtnClicked] = useState(false);
   const [selectedTags, setSelectedTags] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
+  const [isAllPostsSelected, setIsAllPostsSelected] = useState(true);
+  const [filteredPosts, setFilteredPosts] = useState([]);
 
   // load data depending on whats in search bar
   useEffect(() => {
@@ -18,6 +22,42 @@ const HomePage = ({ data, searchQuery }) => {
     );
     setPosts(filteredData);
   }, [data, searchQuery]);
+
+  // Logic for filtering by tags
+  const filterByTags = (selectedTag) => {
+    setSelectedTags(selectedTag);
+    if (selectedTag === "") {
+      setCurrentPage(1); // Reset to first page when "All Posts" is selected
+      setFilteredPosts([]); // Clear filtered posts
+    } else {
+      const filteredData = posts.filter((post) => {
+        if (selectedTag === "code") {
+          return post.code !== null && post.code !== "";
+        } else if (selectedTag === "image") {
+          return post.image !== null && post.image !== "";
+        } else if (selectedTag === "general") {
+          return !(post.image || post.code);
+        }
+        return true;
+      });
+      setCurrentPage(1); // Reset to first page when a tag is selected
+      setFilteredPosts(filteredData); // Set filtered posts
+    }
+  };
+
+  // Logic for pagination
+  const currentPosts = selectedTags ? filteredPosts : posts;
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPostsSlice = currentPosts.slice(
+    indexOfFirstPost,
+    indexOfLastPost
+  );
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   // handle vote sorting
   const handleSortByVotes = () => {
@@ -53,24 +93,7 @@ const HomePage = ({ data, searchQuery }) => {
     setNewestBtnClicked(!newestBtnClicked);
   };
 
-  // filter post by tags
-  const filteredByTags = posts.filter((data) => {
-    if (selectedTags) {
-      const containsImage = data.image !== null && data.image !== "";
-      const containsCode = data.code !== null && data.code !== "";
-      const containsNothing = !containsImage && !containsCode;
-
-      if (selectedTags === "code") {
-        return containsCode;
-      } else if (selectedTags === "image") {
-        return containsImage;
-      } else if (selectedTags === "general") {
-        return containsNothing;
-      }
-    }
-  });
-
-  const displayedPosts = filteredByTags.length > 0 ? filteredByTags : posts;
+  //const displayedPosts = filteredByTags.length > 0 ? filteredByTags : posts;
 
   return (
     <>
@@ -103,7 +126,7 @@ const HomePage = ({ data, searchQuery }) => {
               <select
                 className="form-select shadow-none"
                 aria-label="Default select example"
-                onChange={(e) => setSelectedTags(e.target.value)}
+                onChange={(e) => filterByTags(e.target.value)}
               >
                 <option value="">All Posts</option>
                 <option value="code">With Code</option>
@@ -113,8 +136,9 @@ const HomePage = ({ data, searchQuery }) => {
             </div>
             {/* Displayed posts */}
             <div className="row">
-              {Array.isArray(displayedPosts) && displayedPosts.length !== 0 ? (
-                displayedPosts.map((post, index) => (
+              {Array.isArray(currentPostsSlice) &&
+              currentPostsSlice.length !== 0 ? (
+                currentPostsSlice.map((post, index) => (
                   <div className="col-12" key={index}>
                     <Card data={post} />
                   </div>
@@ -127,6 +151,29 @@ const HomePage = ({ data, searchQuery }) => {
                   </div>
                 </div>
               )}
+            </div>
+            {/* Pagination */}
+            <div className="d-flex justify-content-center align-items-center">
+              <button
+                onClick={() => paginate(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="btn btn-link"
+              >
+                Back
+              </button>
+              <p className="mx-3 mb-0">
+                Page {currentPage} of{" "}
+                {Math.ceil(currentPosts.length / postsPerPage)}
+              </p>
+              <button
+                onClick={() => paginate(currentPage + 1)}
+                disabled={
+                  currentPage === Math.ceil(currentPosts.length / postsPerPage)
+                }
+                className="btn btn-link"
+              >
+                Next
+              </button>
             </div>
           </div>
 

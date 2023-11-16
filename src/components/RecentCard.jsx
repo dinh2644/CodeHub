@@ -86,70 +86,74 @@ const RecentCard = ({ data }) => {
           <h5 className="card-title mb-4" style={{ textAlign: "center" }}>
             🔥 Hottest Post
           </h5>
-          <Link
-            to={`${mostLiked.id}`}
-            style={{ textDecoration: "none", color: "black" }}
-          >
-            <div className="card" style={{ width: "25rem" }}>
-              <div className="card-body" style={{ padding: "8px" }}>
-                <div className="container">
-                  <div className="row p-2">
-                    <div className="col-8">
-                      <div
-                        className="card-text mb-1"
-                        style={{ fontSize: "19px" }}
-                      >
-                        {mostLiked.details}
-                      </div>
-                      <div
-                        className=" text-muted mb-1"
-                        style={{ fontSize: "13px" }}
-                      >
-                        Posted {formattedDate}
-                      </div>
-                      <div
-                        className="col d-flex mt-1"
-                        style={{ fontSize: "14px" }}
-                      >
-                        {/* Tags */}
-                        <div className=" d-flex">
-                          <div
-                            className="hasCodeBox1"
-                            style={{ display: hasCode ? "" : "none" }}
-                          >
-                            Has Code
-                          </div>
-                          <div
-                            className="hasImageBox1"
-                            style={{
-                              display: hasImage ? "" : "none",
-                              marginLeft: "7px",
-                            }}
-                          >
-                            Has Image
-                          </div>
-                          <div
-                            className="generalDicussionBox1"
-                            style={{
-                              display: hasNoImageOrCode ? "" : "none",
-                              marginLeft: "7px",
-                            }}
-                          >
-                            General Disucssion
+          {mostLiked.length !== 0 ? (
+            <Link
+              to={`${mostLiked.id}`}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <div className="card" style={{ width: "25rem" }}>
+                <div className="card-body" style={{ padding: "8px" }}>
+                  <div className="container">
+                    <div className="row p-2">
+                      <div className="col-8">
+                        <div
+                          className="card-text mb-1"
+                          style={{ fontSize: "19px" }}
+                        >
+                          {mostLiked.details}
+                        </div>
+                        <div
+                          className=" text-muted mb-1"
+                          style={{ fontSize: "13px" }}
+                        >
+                          Posted {formattedDate}
+                        </div>
+                        <div
+                          className="col d-flex mt-1"
+                          style={{ fontSize: "14px" }}
+                        >
+                          {/* Tags */}
+                          <div className=" d-flex">
+                            <div
+                              className="hasCodeBox1"
+                              style={{ display: hasCode ? "" : "none" }}
+                            >
+                              Has Code
+                            </div>
+                            <div
+                              className="hasImageBox1"
+                              style={{
+                                display: hasImage ? "" : "none",
+                                marginLeft: "7px",
+                              }}
+                            >
+                              Has Image
+                            </div>
+                            <div
+                              className="generalDicussionBox1"
+                              style={{
+                                display: hasNoImageOrCode ? "" : "none",
+                                marginLeft: "7px",
+                              }}
+                            >
+                              General Disucssion
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="col-4 d-flex flex-column justify-content-center align-items-end">
-                      {" "}
-                      <div>{mostLiked.votes} Votes</div>
-                      <div>{mostLikedComments} Replies</div>
+                      <div className="col-4 d-flex flex-column justify-content-center align-items-end">
+                        {" "}
+                        <div>{mostLiked.votes} Votes</div>
+                        <div>{mostLikedComments} Replies</div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          ) : (
+            "Nothing"
+          )}
         </div>
       </div>
     </>

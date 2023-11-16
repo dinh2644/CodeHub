@@ -55,3 +55,7 @@
 
   box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
 }
+
+.paginationDisabled {
+  pointer-events: none;
+}
