@@ -2,14 +2,19 @@ hr {
   width: 100%;
 }
 
+.content {
+  font-size: 20px;
+}
+
 .comment-section {
   position: relative;
   display: block;
   max-height: 150px;
   overflow: auto;
   width: 100%;
-  padding: 0.25rem;
-  background-color: #ffeeee;
+  padding: 1rem;
+  margin: auto;
+  background-color: #f8f9fa;
   border: 1px solid #dee2e6;
   color: black !important;
 }

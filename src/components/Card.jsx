@@ -8,6 +8,7 @@ const Card = ({ data }) => {
   const [hasCode, setHasCode] = useState(false);
   const [hasImage, setHasImage] = useState(false);
   const [hasNoImageOrCode, setHasNoImageOrCode] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
 
   // fetch replies count manually
   useEffect(() => {
@@ -67,7 +68,7 @@ const Card = ({ data }) => {
 
   return (
     <>
-      <div className="card" style={{ width: "60rem" }}>
+      <div className="card cardMain" style={{ width: "968px" }}>
         <Link
           to={`${data.id}`}
           style={{ textDecoration: "none", color: "black" }}
@@ -83,7 +84,10 @@ const Card = ({ data }) => {
                 <div className="mt-3 mb-2 d-flex">
                   <div
                     className="hasCodeBox"
-                    style={{ display: hasCode ? "" : "none" }}
+                    style={{
+                      display: hasCode ? "" : "none",
+                      marginRight: "8px",
+                    }}
                   >
                     Has Code
                   </div>
@@ -91,7 +95,7 @@ const Card = ({ data }) => {
                     className="hasImageBox"
                     style={{
                       display: hasImage ? "" : "none",
-                      marginLeft: "7px",
+                      marginRight: "10px",
                     }}
                   >
                     Has Image
@@ -100,7 +104,6 @@ const Card = ({ data }) => {
                     className="generalDicussionBox"
                     style={{
                       display: hasNoImageOrCode ? "" : "none",
-                      marginLeft: "7px",
                     }}
                   >
                     General Disucssion

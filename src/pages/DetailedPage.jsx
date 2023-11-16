@@ -238,7 +238,9 @@ const DetailedPage = ({ data }) => {
           <div className="col ">
             <h5 style={{ fontWeight: "500" }}>{post?.details}</h5>
             <pre>
-              <code className="code">{post?.code}</code>
+              <code className="code">
+                {post?.code ? post.code : "No code provided"}
+              </code>
             </pre>
           </div>
         </div>

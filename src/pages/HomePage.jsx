@@ -76,55 +76,64 @@ const HomePage = ({ data, searchQuery }) => {
     <>
       <div className="container">
         <div className="row">
-          <div
-            className="col-9 mt-4 mb-4 d-flex justify-content-between"
-            style={{ fontSize: "18px" }}
-          >
-            <div>
-              Order by{" "}
-              <button
-                className="mx-2 button-8 shadow-none"
-                onClick={handleSortByDate}
-                style={{ filter: newestBtnClicked ? "brightness(85%)" : "" }}
-              >
-                Newest
-              </button>
-              <button
-                onClick={handleSortByVotes}
-                style={{ filter: popularBtnClicked ? "brightness(85%)" : "" }}
-                className="button-8 shadow-none"
-              >
-                Most Popular
-              </button>
-            </div>
-            <select
-              className="form-select shadow-none"
-              aria-label="Default select example"
-              onChange={(e) => setSelectedTags(e.target.value)}
+          {/* Left Section - Mapped Posts */}
+          <div className="col-9 mt-4 mb-4">
+            {/* Sort buttons and select tags */}
+            <div
+              className="d-flex justify-content-between mb-4"
+              style={{ fontSize: "18px" }}
             >
-              <option value="">All Posts</option>
-              <option value="code">With Code</option>
-              <option value="image">With Image</option>
-              <option value="general">General Discussion</option>
-            </select>
-          </div>
-          <div className="col-3"></div>
-        </div>
-        <div className="row">
-          {Array.isArray(displayedPosts) && displayedPosts.length !== 0 ? (
-            displayedPosts.map((post, index) => (
-              <div className="col-12" key={index}>
-                <Card data={post} />
+              <div>
+                Order by{" "}
+                <button
+                  className="mx-2 button-8 shadow-none"
+                  onClick={handleSortByDate}
+                  style={{ filter: newestBtnClicked ? "brightness(85%)" : "" }}
+                >
+                  Newest
+                </button>
+                <button
+                  onClick={handleSortByVotes}
+                  style={{ filter: popularBtnClicked ? "brightness(85%)" : "" }}
+                  className="button-8 shadow-none"
+                >
+                  Most Popular
+                </button>
               </div>
-            ))
-          ) : (
-            // display if search bar cant find anything
-            <div className="row">
-              <div className="col">
-                <p>No results found for your search.</p>
-              </div>
+              <select
+                className="form-select shadow-none"
+                aria-label="Default select example"
+                onChange={(e) => setSelectedTags(e.target.value)}
+              >
+                <option value="">All Posts</option>
+                <option value="code">With Code</option>
+                <option value="image">With Image</option>
+                <option value="general">General Discussion</option>
+              </select>
             </div>
-          )}
+            {/* Displayed posts */}
+            <div className="row">
+              {Array.isArray(displayedPosts) && displayedPosts.length !== 0 ? (
+                displayedPosts.map((post, index) => (
+                  <div className="col-12" key={index}>
+                    <Card data={post} />
+                  </div>
+                ))
+              ) : (
+                // Display if search bar can't find anything
+                <div className="row">
+                  <div className="col">
+                    <p>No results found for your search.</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Right Section - Single Card */}
+          <div className="col-3" style={{ marginTop: "80px" }}>
+            <RecentCard data={data} />
+          </div>
         </div>
       </div>
     </>
