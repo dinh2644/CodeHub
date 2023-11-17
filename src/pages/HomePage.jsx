@@ -12,44 +12,47 @@ const HomePage = ({ data, searchQuery }) => {
   const [selectedTags, setSelectedTags] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
-  const [isAllPostsSelected, setIsAllPostsSelected] = useState(true);
   const [filteredPosts, setFilteredPosts] = useState([]);
 
   // load data depending on whats in search bar
   useEffect(() => {
-    const filteredData = data.filter((post) =>
-      String(post.title).toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const filteredData = data.filter((post) => {
+      const matchesSearch = String(post.title)
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
+      const matchesTags =
+        selectedTags === "" ||
+        (selectedTags === "code" && post.code !== null && post.code !== "") ||
+        (selectedTags === "image" &&
+          post.image !== null &&
+          post.image !== "") ||
+        (selectedTags === "general" && !(post.image || post.code));
+      return matchesSearch && matchesTags;
+    });
     setPosts(filteredData);
   }, [data, searchQuery]);
 
   // Logic for filtering by tags
   const filterByTags = (selectedTag) => {
     setSelectedTags(selectedTag);
-    if (selectedTag === "") {
-      setCurrentPage(1); // Reset to first page when "All Posts" is selected
-      setFilteredPosts([]); // Clear filtered posts
-    } else {
-      const filteredData = posts.filter((post) => {
-        if (selectedTag === "code") {
-          return post.code !== null && post.code !== "";
-        } else if (selectedTag === "image") {
-          return post.image !== null && post.image !== "";
-        } else if (selectedTag === "general") {
-          return !(post.image || post.code);
-        }
-        return true;
-      });
-      setCurrentPage(1); // Reset to first page when a tag is selected
-      setFilteredPosts(filteredData); // Set filtered posts
-    }
+    setCurrentPage(1);
   };
 
   // Logic for pagination
-  const currentPosts = selectedTags ? filteredPosts : posts;
-
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = selectedTags
+    ? posts.filter((post) => {
+        if (selectedTags === "code") {
+          return post.code !== null && post.code !== "";
+        } else if (selectedTags === "image") {
+          return post.image !== null && post.image !== "";
+        } else if (selectedTags === "general") {
+          return !(post.image || post.code);
+        }
+        return true;
+      })
+    : posts;
   const currentPostsSlice = currentPosts.slice(
     indexOfFirstPost,
     indexOfLastPost
