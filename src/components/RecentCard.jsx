@@ -81,7 +81,7 @@ const RecentCard = ({ data }) => {
   };
   return (
     <>
-      <div className="card" style={{ width: "30rem" }}>
+      <div className="card" style={{ width: "29rem" }}>
         <div className="card-body ">
           <h5 className="card-title mb-4" style={{ textAlign: "center" }}>
             🔥 Hottest Post
@@ -91,7 +91,7 @@ const RecentCard = ({ data }) => {
               to={`${mostLiked.id}`}
               style={{ textDecoration: "none", color: "black" }}
             >
-              <div className="card" style={{ width: "25rem" }}>
+              <div className="card" style={{ width: "24.5rem" }}>
                 <div className="card-body" style={{ padding: "8px" }}>
                   <div className="container">
                     <div className="row p-2">

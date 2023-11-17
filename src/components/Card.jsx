@@ -8,7 +8,6 @@ const Card = ({ data }) => {
   const [hasCode, setHasCode] = useState(false);
   const [hasImage, setHasImage] = useState(false);
   const [hasNoImageOrCode, setHasNoImageOrCode] = useState(false);
-  const [showLoader, setShowLoader] = useState(false);
 
   // fetch replies count manually
   useEffect(() => {
@@ -68,7 +67,7 @@ const Card = ({ data }) => {
 
   return (
     <>
-      <div className="card cardMain" style={{ width: "968px" }}>
+      <div className="card cardMain" style={{ width: "68rem" }}>
         <Link
           to={`${data.id}`}
           style={{ textDecoration: "none", color: "black" }}

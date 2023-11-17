@@ -11,58 +11,12 @@ const HomePage = ({ data, searchQuery }) => {
   const [newestBtnClicked, setNewestBtnClicked] = useState(false);
   const [selectedTags, setSelectedTags] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(5);
-  const [filteredPosts, setFilteredPosts] = useState([]);
 
-  // load data depending on whats in search bar
   useEffect(() => {
-    const filteredData = data.filter((post) => {
-      const matchesSearch = String(post.title)
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase());
-      const matchesTags =
-        selectedTags === "" ||
-        (selectedTags === "code" && post.code !== null && post.code !== "") ||
-        (selectedTags === "image" &&
-          post.image !== null &&
-          post.image !== "") ||
-        (selectedTags === "general" && !(post.image || post.code));
-      return matchesSearch && matchesTags;
-    });
-    setPosts(filteredData);
-  }, [data, searchQuery]);
+    setPosts(data);
+  }, [data]);
 
-  // Logic for filtering by tags
-  const filterByTags = (selectedTag) => {
-    setSelectedTags(selectedTag);
-    setCurrentPage(1);
-  };
-
-  // Logic for pagination
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = selectedTags
-    ? posts.filter((post) => {
-        if (selectedTags === "code") {
-          return post.code !== null && post.code !== "";
-        } else if (selectedTags === "image") {
-          return post.image !== null && post.image !== "";
-        } else if (selectedTags === "general") {
-          return !(post.image || post.code);
-        }
-        return true;
-      })
-    : posts;
-  const currentPostsSlice = currentPosts.slice(
-    indexOfFirstPost,
-    indexOfLastPost
-  );
-
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  // handle vote sorting
+  // sort by votes
   const handleSortByVotes = () => {
     const newOrder = sortByVoteOrder === "asc" ? "desc" : "asc";
     const sortedDataByVotes = [...posts].sort((a, b) => {
@@ -79,7 +33,7 @@ const HomePage = ({ data, searchQuery }) => {
     setPopularBtnClicked(!popularBtnClicked);
   };
 
-  // handle newest sorting
+  // sort by newest
   const handleSortByDate = () => {
     const newDate = sortByDateOrder === "asc" ? "desc" : "asc";
     const sortedDataByDate = [...posts].sort((a, b) => {
@@ -96,14 +50,52 @@ const HomePage = ({ data, searchQuery }) => {
     setNewestBtnClicked(!newestBtnClicked);
   };
 
-  //const displayedPosts = filteredByTags.length > 0 ? filteredByTags : posts;
+  // handle pagination
+  const itemsPerPage = 10;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  // hold multipled filtered data
+  const filteredData = posts
+    // search filter
+    .filter((post) => {
+      return (
+        String(searchQuery.toLowerCase()) === "" ||
+        (post?.title &&
+          post?.title.toLowerCase().includes(searchQuery.toLowerCase()))
+      );
+    })
+    // dropdown filter
+    .filter((post) => {
+      if (selectedTags) {
+        const containsImage = post?.image !== null && post?.image !== "";
+        const containsCode = post?.code !== null && post?.code !== "";
+        const containsNothing = !containsImage && !containsCode;
+
+        if (selectedTags === "code") {
+          return containsCode;
+        } else if (selectedTags === "image") {
+          return containsImage;
+        } else if (selectedTags === "general") {
+          return containsNothing;
+        }
+      }
+      return true;
+    });
+
+  const slicedData = filteredData.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
   return (
     <>
       <div className="container">
         <div className="row">
           {/* Left Section - Mapped Posts */}
-          <div className="col-9 mt-4 mb-4">
+          <div className="col-10 mt-4 mb-4">
             {/* Sort buttons and select tags */}
             <div
               className="d-flex justify-content-between mb-4"
@@ -129,7 +121,7 @@ const HomePage = ({ data, searchQuery }) => {
               <select
                 className="form-select shadow-none"
                 aria-label="Default select example"
-                onChange={(e) => filterByTags(e.target.value)}
+                onChange={(e) => setSelectedTags(e.target.value)}
               >
                 <option value="">All Posts</option>
                 <option value="code">With Code</option>
@@ -139,9 +131,8 @@ const HomePage = ({ data, searchQuery }) => {
             </div>
             {/* Displayed posts */}
             <div className="row">
-              {Array.isArray(currentPostsSlice) &&
-              currentPostsSlice.length !== 0 ? (
-                currentPostsSlice.map((post, index) => (
+              {Array.isArray(slicedData) && slicedData.length !== 0 ? (
+                slicedData.map((post, index) => (
                   <div className="col-12" key={index}>
                     <Card data={post} />
                   </div>
@@ -155,34 +146,38 @@ const HomePage = ({ data, searchQuery }) => {
                 </div>
               )}
             </div>
-            {/* Pagination */}
-            <div className="d-flex justify-content-center align-items-center">
+          </div>
+
+          {/* Right Section - Single Card */}
+          <div className="col-lg-2" style={{ marginTop: "80px" }}>
+            <RecentCard data={data} />
+          </div>
+        </div>
+        {/* Pagination */}
+        <div className="row">
+          <div className="col ">
+            <div
+              className="d-flex align-items-center pagination mb-5 justify-content-center"
+              style={{ marginLeft: "-200px" }}
+            >
               <button
-                onClick={() => paginate(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="btn btn-link"
+                onClick={() => handlePageChange(currentPage - 1)}
+                className="mx-1 button-4"
               >
-                Back
+                Previous
               </button>
-              <p className="mx-3 mb-0">
-                Page {currentPage} of{" "}
-                {Math.ceil(currentPosts.length / postsPerPage)}
-              </p>
+              <span>
+                {currentPage} of {totalPages}
+              </span>
               <button
-                onClick={() => paginate(currentPage + 1)}
-                disabled={
-                  currentPage === Math.ceil(currentPosts.length / postsPerPage)
-                }
-                className="btn btn-link"
+                disabled={currentPage === totalPages}
+                onClick={() => handlePageChange(currentPage + 1)}
+                className="mx-1 button-4"
               >
                 Next
               </button>
             </div>
-          </div>
-
-          {/* Right Section - Single Card */}
-          <div className="col-3" style={{ marginTop: "80px" }}>
-            <RecentCard data={data} />
           </div>
         </div>
       </div>
