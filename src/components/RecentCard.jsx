@@ -27,16 +27,18 @@ const RecentCard = ({ data }) => {
   // fetch replies for this post
   useEffect(() => {
     const fetchRepliesCount = async () => {
-      const { data, error } = await supabase
-        .from("Comments")
-        .select("*")
-        .eq("post_id", mostLiked.id);
+      if (mostLiked && mostLiked.id) {
+        const { data, error } = await supabase
+          .from("Comments")
+          .select("*")
+          .eq("post_id", mostLiked.id);
 
-      if (error) {
-        console.error(error);
-      } else {
-        setMostLikedComments(data.length);
-        checkForImageOrCode();
+        if (error) {
+          console.error(error);
+        } else {
+          setMostLikedComments(data.length);
+          checkForImageOrCode();
+        }
       }
     };
     fetchRepliesCount();
@@ -149,7 +151,7 @@ const RecentCard = ({ data }) => {
               </div>
             </Link>
           ) : (
-            "Nothing"
+            <div className="text-center">...</div>
           )}
         </div>
       </div>

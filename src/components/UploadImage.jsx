@@ -13,7 +13,7 @@ const UploadImage = ({ handleFile }) => {
   };
 
   return (
-    <div className="mb-3">
+    <div className="mb-1">
       <label
         htmlFor="file"
         style={{ marginRight: ".5rem", color: "var(--text)" }}

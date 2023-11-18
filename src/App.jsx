@@ -19,6 +19,7 @@ import HomePage from "./pages/HomePage";
 import CreatePage from "./pages/CreatePage";
 import UpdatePage from "./pages/UpdatePage";
 import DetailedPage from "./pages/DetailedPage";
+import { Toaster, toast } from "react-hot-toast";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
@@ -36,12 +37,18 @@ const App = () => {
       if (error) {
         console.error(error);
       } else {
-        setPosts(data);
         setIsLoading(false);
+        setPosts(data);
       }
     };
-
     fetchPosts();
+
+    // display toast messages
+    const toastMessage = localStorage.getItem("toast");
+    if (toastMessage) {
+      toast.success(toastMessage);
+      localStorage.removeItem("toast");
+    }
   }, []);
 
   // handle search
@@ -51,6 +58,7 @@ const App = () => {
 
   return (
     <>
+      <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
       {isLoading ? (
         <Loading />
       ) : (

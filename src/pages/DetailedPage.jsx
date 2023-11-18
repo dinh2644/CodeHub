@@ -4,6 +4,7 @@ import "../assets/DetailedPage.css";
 import { supabase } from "../client";
 import CommentsSection from "../components/CommentsSection";
 import Loading from "../components/Loading";
+import { toast } from "react-hot-toast";
 
 const DetailedPage = ({ data }) => {
   const { id } = useParams();
@@ -98,6 +99,19 @@ const DetailedPage = ({ data }) => {
   // post comment
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (comment.content.trim() === "" || comment.content.trim().length <= 10) {
+      toast.error("Comments must be longer than 10 characters!");
+      return;
+    }
+    if (
+      comment.secret_key.trim() === "" ||
+      comment.secret_key.trim().length <= 2
+    ) {
+      toast.error("Secret Key cannot be empty and be minimum 3 characters!");
+      return;
+    }
+
     const { error } = await supabase.from("Comments").insert([comment]);
     if (error) {
       console.error(error);
@@ -119,20 +133,23 @@ const DetailedPage = ({ data }) => {
     } catch (error) {
       console.error("Error deleting post and comments:", error);
     }
-
+    localStorage.setItem("toast", "Post Deleted!");
     window.location = "/";
   };
 
   // handle secret key
   const handleSecretKey = () => {
-    const isValid = validKey === post.secret_key;
+    const isValid = validKey === post.secret_key.trim();
     if (isValid) {
       if (actionKey == "submit") {
+        localStorage.setItem("toast", "Access Granted!");
         window.location = `/update/${post?.id}`;
       }
       if (actionKey == "delete") {
         handleDelete();
       }
+    } else {
+      toast.error("Wrong Key!");
     }
   };
 
@@ -233,7 +250,7 @@ const DetailedPage = ({ data }) => {
               <span
                 className="arrows"
                 onClick={() => updateVote("up")}
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer", color: "#5d6165" }}
               >
                 ⬆️
               </span>
@@ -241,7 +258,7 @@ const DetailedPage = ({ data }) => {
               <span
                 className="arrows"
                 onClick={() => updateVote("down")}
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer", color: "#5d6165" }}
               >
                 ⬇️
               </span>
@@ -295,7 +312,7 @@ const DetailedPage = ({ data }) => {
                     onChange={handleChange}
                     placeholder="Be nice!"
                   ></textarea>
-
+                  {/* Set secret key */}
                   <input
                     style={{
                       fontSize: "15px",

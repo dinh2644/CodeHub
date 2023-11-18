@@ -141,7 +141,7 @@ const HomePage = ({ data, searchQuery }) => {
                 // Display if search bar can't find anything
                 <div className="row">
                   <div className="col">
-                    <p>No results found for your search.</p>
+                    <p>No results found on current page.</p>
                   </div>
                 </div>
               )}

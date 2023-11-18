@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../assets/UpdatePage.css";
 import { useParams, Link } from "react-router-dom";
 import { supabase } from "../client";
+import UploadImage from "../components/UploadImage";
+import { v4 as uuidv4 } from "uuid";
+import { toast } from "react-hot-toast";
 
 const UpdatePage = ({ data }) => {
   const { id } = useParams();
@@ -12,7 +15,10 @@ const UpdatePage = ({ data }) => {
     title: "",
     details: "",
     code: "",
+    image: "",
+    secret_key: "",
   });
+  const [imageName, setImageName] = useState({ fileName: "" });
 
   // handle input change
   const handleChange = (event) => {
@@ -29,6 +35,22 @@ const UpdatePage = ({ data }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (editedPost.title.trim() === "") {
+      toast.error("Title cannot be empty!");
+      return;
+    }
+    if (editedPost.details.trim() === "") {
+      toast.error("Details cannot be empty!");
+      return;
+    }
+    if (
+      editedPost.secret_key.trim() === "" ||
+      editedPost.secret_key.trim().length <= 2
+    ) {
+      toast.error("Secret Key cannot be empty and be minimum 3 characters!");
+      return;
+    }
+
     const { error } = await supabase
       .from("Posts")
       .update([editedPost])
@@ -41,14 +63,14 @@ const UpdatePage = ({ data }) => {
         details: "",
         code: "",
       });
-
+      localStorage.setItem("toast", "Post Updated!");
       window.location = "/";
     }
   };
 
   // handle delete post
-  const handleDelete = async (event) => {
-    event.preventDefault();
+  const handleDelete = async (e) => {
+    e.preventDefault();
 
     try {
       await supabase.from("Posts").delete().eq("id", id);
@@ -56,8 +78,38 @@ const UpdatePage = ({ data }) => {
     } catch (error) {
       console.error("Error deleting post and comments:", error);
     }
-
+    localStorage.setItem("toast", "Post Deleted!");
     window.location = "/";
+  };
+
+  // handle image change
+  const handleImageChange = async (image) => {
+    // upload image first to storage
+    const fileName = `images/${uuidv4()}.png`;
+    const fileName1 = image.name;
+    await supabase.storage.from("uploads").upload(fileName, image, {
+      cacheControl: "3600",
+      upsert: false,
+    });
+
+    // get public url of that image
+    const { data: imageURL } = supabase.storage
+      .from("uploads")
+      .getPublicUrl(fileName);
+
+    // extract url
+    const imageUrl = imageURL?.publicUrl;
+
+    // update state with the image URL
+    setEditedPost((prev) => ({
+      ...prev,
+      image: imageUrl,
+    }));
+
+    setImageName((prev) => ({
+      ...prev,
+      fileName: fileName1,
+    }));
   };
 
   return (
@@ -116,6 +168,38 @@ const UpdatePage = ({ data }) => {
                   cols={30}
                   rows={10}
                 ></textarea>
+              </div>
+
+              <UploadImage handleFile={handleImageChange} />
+              <div className="selected-image-container">
+                {imageName && (
+                  <p style={{ color: "green", fontWeight: "700" }}>
+                    {" "}
+                    {imageName.fileName}
+                  </p>
+                )}
+              </div>
+              <div className="mb-3">
+                <label
+                  htmlFor="secret_key"
+                  className="form-label createPageText"
+                  style={{ marginRight: "5px" }}
+                >
+                  Update Secret Key:
+                </label>
+                <input
+                  type="text"
+                  id="secret_key"
+                  className="keyBar"
+                  style={{
+                    background: "white",
+                    color: "black",
+                    textDecoration: "none",
+                  }}
+                  name="secret_key"
+                  onChange={handleChange}
+                  value={editedPost.secret_key}
+                />
               </div>
 
               <button
