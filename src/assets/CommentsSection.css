@@ -3,16 +3,16 @@ hr {
 }
 
 .content {
-  font-size: 20px;
+  font-size: 19px;
 }
 
 .comment-section {
   position: relative;
   display: block;
-  max-height: 150px;
+  max-height: 500px;
   overflow: auto;
   width: 100%;
-  padding: 1rem;
+  padding: 0.5rem;
   margin: auto;
   background-color: #f8f9fa;
   border: 1px solid #dee2e6;

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import "../assets/CommentsSection.css";
 import { supabase } from "../client";
+import { toast } from "react-hot-toast";
 
 const CommentsSection = ({ postID }) => {
   const [comment, setComment] = useState([]);
@@ -40,9 +41,12 @@ const CommentsSection = ({ postID }) => {
 
   // handle delete button
   const handleSecretKey = (secretKey, commentId) => {
-    const isValid = validKey === secretKey;
+    const isValid = validKey === secretKey.trim();
     if (isValid) {
+      localStorage.setItem("toast", "Comment Deleted!");
       handleDelete(commentId);
+    } else {
+      toast.error("Wrong Key!");
     }
   };
 
@@ -85,7 +89,10 @@ const CommentsSection = ({ postID }) => {
                   <div className="text-muted" style={{ fontSize: "15px" }}>
                     {formattedDate}
                   </div>
-                  <div className="content">{answer.content}</div>
+                  <pre>
+                    <div className="content mt-3">{answer.content}</div>
+                  </pre>
+
                   <button
                     className="btn btn-danger delete-button"
                     style={{

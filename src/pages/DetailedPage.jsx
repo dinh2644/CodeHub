@@ -100,8 +100,8 @@ const DetailedPage = ({ data }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (comment.content.trim() === "" || comment.content.trim().length <= 10) {
-      toast.error("Comments must be longer than 10 characters!");
+    if (comment.content.trim() === "" || comment.content.trim().length <= 3) {
+      toast.error("Comments must be longer than 3 characters!");
       return;
     }
     if (
