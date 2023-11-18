@@ -49,3 +49,8 @@ hr {
 .comment-section:hover .delete-button {
   display: block;
 }
+
+.preComment {
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+}

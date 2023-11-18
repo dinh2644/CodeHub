@@ -89,9 +89,13 @@ const CommentsSection = ({ postID }) => {
                   <div className="text-muted" style={{ fontSize: "15px" }}>
                     {formattedDate}
                   </div>
-                  <pre>
-                    <div className="content mt-3">{answer.content}</div>
-                  </pre>
+
+                  <div
+                    className="content mt-2 mb-2"
+                    style={{ whiteSpace: "pre-wrap" }}
+                  >
+                    {answer.content}
+                  </div>
 
                   <button
                     className="btn btn-danger delete-button"
