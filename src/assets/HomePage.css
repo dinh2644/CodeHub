@@ -1,10 +1,10 @@
 .button-8 {
-  background-color: #e1ecf4;
+  background-color: var(--four);
   border-radius: 3px;
-  border: 1px solid #7aa7c7;
+  border: 1px solid var(--one);
   box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
   box-sizing: border-box;
-  color: #356f99;
+  color: var(--one);
   cursor: pointer;
   display: inline-block;
   font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans",
@@ -27,8 +27,7 @@
 
 .button-8:hover,
 .button-8:focus {
-  background-color: #b3d3ea;
-  color: #2c5777;
+  color: var(--text);
 }
 
 .button-8:focus {
@@ -44,18 +43,64 @@
 .form-select {
   width: max-content;
   border-radius: 3px;
-  border: 1px solid #7aa7c7;
+  border: 1px solid var(--one);
   outline: none;
   font-size: 15px;
   font-weight: 400;
   line-height: 1.15385;
-  color: #356f99;
-  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans",
-    sans-serif;
-
+  color: var(--one);
   box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
 }
 
 .paginationDisabled {
   pointer-events: none;
+}
+
+.button-4s {
+  appearance: none;
+  background-color: var(--button-color);
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
+    rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: var(--text);
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+.button-4s:hover {
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+.button-4s:focus {
+  outline: 1px transparent;
+}
+
+.button-4s:before {
+  display: none;
+}
+
+.button-4s:-webkit-details-marker {
+  display: none;
+}
+
+.orderByAndBtns {
+  color: var(--text);
 }

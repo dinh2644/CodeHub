@@ -63,12 +63,12 @@ const CreatePage = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="container mt-3">
         <div className="row">
           <div className="col mt-3">
             <form id="myform">
               <div className="mb-3">
-                <label htmlFor="title" className="form-label">
+                <label htmlFor="title" className="form-label createPageText">
                   Title
                 </label>
                 <input
@@ -81,7 +81,7 @@ const CreatePage = () => {
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="details" className="form-label">
+                <label htmlFor="details" className="form-label createPageText">
                   Details
                 </label>
                 <input
@@ -92,13 +92,13 @@ const CreatePage = () => {
                   onChange={handleChange}
                   value={post.details}
                 />
-                <div className="form-text">
+                <div className="form-text createPageText">
                   Be specific and imagine you’re asking a question to another
                   person.
                 </div>
               </div>
               <div className="mb-3">
-                <label htmlFor="details" className="form-label">
+                <label htmlFor="details" className="form-label createPageText">
                   Paste Your Code:
                 </label>
                 <textarea
@@ -118,7 +118,7 @@ const CreatePage = () => {
               <div className="mb-3">
                 <label
                   htmlFor="secret_key"
-                  className="form-label"
+                  className="form-label createPageText"
                   style={{ marginRight: "5px" }}
                 >
                   Enter Secret Key:
@@ -138,7 +138,11 @@ const CreatePage = () => {
                 />
               </div>
 
-              <button type="submit" className="button-5" onClick={handleSubmit}>
+              <button
+                type="submit"
+                className="button-5 createPageText"
+                onClick={handleSubmit}
+              >
                 Submit
               </button>
             </form>

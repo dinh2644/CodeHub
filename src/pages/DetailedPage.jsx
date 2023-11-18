@@ -144,19 +144,22 @@ const DetailedPage = ({ data }) => {
         <div className="container detailedPageContainer">
           {/* Title of post */}
           <div className="row">
-            <div className="col mt-3 askedRow ">
+            <div className="col mt-3 askedRow detailedPageText">
               <h2>{post?.title}</h2>
             </div>
           </div>
           {/* Asked on & Edit and Delete buttons */}
           <div className="row mb-2">
             <div className="col d-flex justify-content-between align-items-center askedRow mb-2">
-              <span className="text-muted" style={{ fontSize: "14px" }}>
+              <span
+                className="text-muted detailedPageText"
+                style={{ fontSize: "14px" }}
+              >
                 Asked on {formattedDate}
               </span>
               <span style={{ fontSize: "14px" }}>
                 <button
-                  className="button-4 mx-2"
+                  className="button-4 mx-2 detailedPageText"
                   data-bs-toggle="modal"
                   data-bs-target="#modal"
                   onClick={() => setActionKey("submit")}
@@ -165,7 +168,7 @@ const DetailedPage = ({ data }) => {
                 </button>
                 <button
                   className="button-4"
-                  style={{ background: "darkred", color: "white" }}
+                  style={{ background: "var(--four)", color: "var(--text)" }}
                   data-bs-toggle="modal"
                   data-bs-target="#modal"
                   onClick={() => setActionKey("delete")}
@@ -234,7 +237,7 @@ const DetailedPage = ({ data }) => {
               >
                 ⬆️
               </span>
-              <span>{count ? count : 0}</span>
+              <span className="detailedPageText">{count ? count : 0}</span>
               <span
                 className="arrows"
                 onClick={() => updateVote("down")}
@@ -244,7 +247,9 @@ const DetailedPage = ({ data }) => {
               </span>
             </div>
             <div className="col ">
-              <h5 style={{ fontWeight: "500" }}>{post?.details}</h5>
+              <h5 style={{ fontWeight: "500" }} className="detailedPageText">
+                {post?.details}
+              </h5>
               <pre>
                 <code className="code">
                   {post?.code ? post.code : "No code provided"}
@@ -268,7 +273,7 @@ const DetailedPage = ({ data }) => {
           {/* Comment section */}
           <div className="row">
             <div className="col">
-              <h3>{commentsCount} Comments</h3>
+              <h3 className="detailedPageText">{commentsCount} Comments</h3>
             </div>
           </div>
           <CommentsSection postID={id} />
@@ -276,7 +281,7 @@ const DetailedPage = ({ data }) => {
             <div className="col">
               <form id="myform">
                 <div className="mb-3">
-                  <h3 htmlFor="title" className="form-label">
+                  <h3 htmlFor="title" className="form-label detailedPageText">
                     Your Answer
                   </h3>
 
@@ -313,7 +318,11 @@ const DetailedPage = ({ data }) => {
                   type="submit"
                   className="button-4 mb-5"
                   onClick={handleSubmit}
-                  style={{ width: "10rem", height: "3rem" }}
+                  style={{
+                    width: "10rem",
+                    height: "3rem",
+                    color: "var(--text)",
+                  }}
                 >
                   Post Your Answer
                 </button>

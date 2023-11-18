@@ -21,7 +21,7 @@ const Navbar = ({ handleChange }) => {
         <div className="container navContainer">
           {/* Logo */}
           <Link
-            className="navbar-brand item stackFont"
+            className="navbar-brand item mainLogo"
             to={"/"}
             style={{ fontSize: "25px" }}
           >
@@ -63,12 +63,12 @@ const Navbar = ({ handleChange }) => {
           <div className="item hide-on-mobile">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link className="nav-link" to={"/"}>
+                <Link className="nav-link navbarBtns" to={"/"}>
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to={"/askquestion"}>
+                <Link className="nav-link navbarBtns" to={"/askquestion"}>
                   Ask Question
                 </Link>
               </li>

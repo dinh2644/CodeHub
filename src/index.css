@@ -1,15 +1,41 @@
+/* default white mode */
 :root {
-  --body_background: white;
-  --navbar_background: #f8f9fa;
-  --body_color: black;
-  --link_color: navy;
-  --card_background: #ffffff;
+  /* accents */
+  --one: #ad8b73;
+  --two: #ceab93;
+  --three: #e3caa5;
+  --four: #fffbe9;
+  /* main */
+  --body: #ffffff;
+  --navbar: #ffffff;
+  --card: #ffffff;
+  --text: #000000;
+  --card-text: #000000;
+  --button-color: #f4eae0;
+  --navbar-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  --code-box: #ffeddb;
+  --image-box: #f7ccac;
+  --discuss-box: #dddddd;
+  --orderByBorder: #ad8b73;
 }
 
+/* dark mode */
 [data-theme="dark"] {
-  --body_background: #343541;
-  --navbar_background: purple;
-  --body_color: white;
-  --link_color: cyan;
-  --card_background: #2d2d2d;
+  /* accents */
+  --one: #8e52f5;
+  --two: #8e52f5;
+  --three: #8e52f5;
+  --four: #2dba4e;
+  /* main */
+  --body: #0d1117;
+  --navbar: #0d1117;
+  --card: #0D117;
+  --text: #e6edf3;
+  --card-text: #7d8590;
+  --button-color: #2dba4e;
+  --navbar-border: 1px solid rgb(87, 87, 87);
+  --code-box: #bfafdd;
+  --image-box: #98e695;
+  --discuss-box: #fafbfc;
+  --orderByBorder: #98e695;
 }

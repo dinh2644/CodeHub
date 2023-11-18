@@ -14,12 +14,15 @@ const UploadImage = ({ handleFile }) => {
 
   return (
     <div className="mb-3">
-      <label htmlFor="file" style={{ marginRight: ".5rem" }}>
+      <label
+        htmlFor="file"
+        style={{ marginRight: ".5rem", color: "var(--text)" }}
+      >
         Have an image to upload?
       </label>
       <button
         type="button"
-        className="button-upload button-4"
+        className="button-upload button-4 createPageText"
         onClick={handleImageUpload}
       >
         Upload Image

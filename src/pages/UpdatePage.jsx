@@ -62,12 +62,15 @@ const UpdatePage = ({ data }) => {
 
   return (
     <>
-      <div className="container">
+      <div className="container mt-4">
         <div className="row">
           <div className="col">
             <form id="myform">
               <div className="mb-3">
-                <label htmlFor="title" className="form-label">
+                <label
+                  htmlFor="title"
+                  className="form-labelupdatePageText updatePageText"
+                >
                   Title
                 </label>
                 <input
@@ -81,7 +84,7 @@ const UpdatePage = ({ data }) => {
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="details" className="form-label">
+                <label htmlFor="details" className="form-label updatePageText">
                   Details
                 </label>
                 <input
@@ -93,13 +96,13 @@ const UpdatePage = ({ data }) => {
                   value={editedPost.details}
                   placeholder={post?.details}
                 />
-                <div className="form-text">
+                <div className="form-text updatePageText">
                   Be specific and imagine you’re asking a question to another
                   person.
                 </div>
               </div>
               <div className="mb-3">
-                <label htmlFor="code" className="form-label">
+                <label htmlFor="code" className="form-label updatePageText">
                   Modify Code:
                 </label>
                 <textarea
@@ -116,21 +119,21 @@ const UpdatePage = ({ data }) => {
               </div>
 
               <button
-                className="button-6"
+                className="button-6 updatePageText"
                 style={{ marginRight: "10px" }}
                 onClick={handleSubmit}
               >
                 Update
               </button>
               <button
-                className="button-6"
+                className="button-6 updatePageText"
                 onClick={handleDelete}
-                style={{ background: "darkred", color: "white" }}
+                style={{ background: "var(--four)", color: "black" }}
               >
                 Delete
               </button>
               <Link
-                className="button-6"
+                className="button-6 updatePageText"
                 to={`/${id}`}
                 style={{ textDecoration: "none", marginLeft: "9px" }}
               >

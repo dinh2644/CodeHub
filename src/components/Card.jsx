@@ -76,9 +76,9 @@ const Card = ({ data }) => {
             <div className="row">
               <div className="col-6">
                 {/* Posted date */}
-                <div className="mt-2">Posted {formattedDate}</div>
+                <div className="mt-2 postedText">Posted {formattedDate}</div>
                 {/* Title */}
-                <h4 className="card-title mt-2">{data.title}</h4>
+                <h4 className="card-title mt-2 cardText">{data.title}</h4>
                 {/* Tags */}
                 <div className="mt-3 mb-2 d-flex">
                   <div
@@ -110,7 +110,7 @@ const Card = ({ data }) => {
                 </div>
               </div>
               {/* Votes/Replies */}
-              <div className="col-6 d-flex flex-column align-items-end justify-content-center">
+              <div className="col-6 d-flex flex-column align-items-end justify-content-center cardText">
                 <div>{data.votes} Votes</div> {""}
                 <div>{repliesCount} Replies</div>
               </div>

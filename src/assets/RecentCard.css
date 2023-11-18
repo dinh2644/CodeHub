@@ -1,17 +1,23 @@
 .hasCodeBox1 {
-  background-color: #f9f3cc;
+  background-color: #ffeddb;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   padding: 5px;
   color: black;
 }
 
 .hasImageBox1 {
-  background-color: #d7e5ca;
+  background-color: #f7ccac;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   padding: 5px;
   color: black;
 }
 
 .generalDicussionBox1 {
   background-color: #dddddd;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   padding: 5px;
   color: black;
 }

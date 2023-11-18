@@ -1,4 +1,19 @@
 #root {
   margin: 0 auto !important;
-  background: var(--body_background);
+  background: var(--body) !important;
+}
+
+body {
+  background: var(--body) !important;
+}
+
+.container {
+  background: var(--body) !important;
+}
+
+.darkMode {
+  color: var(--text) !important;
+}
+.cardText {
+  color: var(--card-text) !important;
 }

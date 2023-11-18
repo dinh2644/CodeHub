@@ -83,7 +83,7 @@ const RecentCard = ({ data }) => {
     <>
       <div className="card" style={{ width: "29rem" }}>
         <div className="card-body ">
-          <h5 className="card-title mb-4" style={{ textAlign: "center" }}>
+          <h5 className="card-title darkMode" style={{ textAlign: "center" }}>
             🔥 Hottest Post
           </h5>
           {mostLiked.length !== 0 ? (
@@ -91,62 +91,59 @@ const RecentCard = ({ data }) => {
               to={`${mostLiked.id}`}
               style={{ textDecoration: "none", color: "black" }}
             >
-              <div className="card" style={{ width: "24.5rem" }}>
-                <div className="card-body" style={{ padding: "8px" }}>
-                  <div className="container">
-                    <div className="row p-2">
-                      <div className="col-8">
+              <div className="container">
+                <hr />
+                <div className="row">
+                  <div className="col-8">
+                    <div
+                      className="card-text mb-1 darkMode"
+                      style={{ fontSize: "19px" }}
+                    >
+                      {mostLiked.title}
+                    </div>
+                    <div
+                      className="text-muted mb-1 darkMode"
+                      style={{ fontSize: "13px" }}
+                    >
+                      Posted {formattedDate}
+                    </div>
+                    <div
+                      className="col d-flex mt-1"
+                      style={{ fontSize: "14px" }}
+                    >
+                      {/* Tags */}
+                      <div className=" d-flex">
                         <div
-                          className="card-text mb-1"
-                          style={{ fontSize: "19px" }}
+                          className="hasCodeBox1"
+                          style={{ display: hasCode ? "" : "none" }}
                         >
-                          {mostLiked.details}
+                          Has Code
                         </div>
                         <div
-                          className=" text-muted mb-1"
-                          style={{ fontSize: "13px" }}
+                          className="hasImageBox1"
+                          style={{
+                            display: hasImage ? "" : "none",
+                            marginLeft: "7px",
+                          }}
                         >
-                          Posted {formattedDate}
+                          Has Image
                         </div>
                         <div
-                          className="col d-flex mt-1"
-                          style={{ fontSize: "14px" }}
+                          className="generalDicussionBox1 "
+                          style={{
+                            display: hasNoImageOrCode ? "" : "none",
+                            marginLeft: "7px",
+                          }}
                         >
-                          {/* Tags */}
-                          <div className=" d-flex">
-                            <div
-                              className="hasCodeBox1"
-                              style={{ display: hasCode ? "" : "none" }}
-                            >
-                              Has Code
-                            </div>
-                            <div
-                              className="hasImageBox1"
-                              style={{
-                                display: hasImage ? "" : "none",
-                                marginLeft: "7px",
-                              }}
-                            >
-                              Has Image
-                            </div>
-                            <div
-                              className="generalDicussionBox1"
-                              style={{
-                                display: hasNoImageOrCode ? "" : "none",
-                                marginLeft: "7px",
-                              }}
-                            >
-                              General Disucssion
-                            </div>
-                          </div>
+                          General Disucssion
                         </div>
-                      </div>
-                      <div className="col-4 d-flex flex-column justify-content-center align-items-end">
-                        {" "}
-                        <div>{mostLiked.votes} Votes</div>
-                        <div>{mostLikedComments} Replies</div>
                       </div>
                     </div>
+                  </div>
+                  <div className="col-4 d-flex flex-column justify-content-center align-items-end darkMode">
+                    {" "}
+                    <div>{mostLiked.votes} Votes</div>
+                    <div>{mostLikedComments} Replies</div>
                   </div>
                 </div>
               </div>

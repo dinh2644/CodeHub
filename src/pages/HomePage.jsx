@@ -92,19 +92,19 @@ const HomePage = ({ data, searchQuery }) => {
 
   return (
     <>
-      <div className="container">
+      <div className="container mt-3">
         <div className="row">
           {/* Left Section - Mapped Posts */}
           <div className="col-10 mt-4 mb-4">
             {/* Sort buttons and select tags */}
             <div
-              className="d-flex justify-content-between mb-4"
+              className="d-flex justify-content-between mb-4 orderByAndBtns"
               style={{ fontSize: "18px" }}
             >
               <div>
                 Order by{" "}
                 <button
-                  className="mx-2 button-8 shadow-none"
+                  className="mx-2 button-8 shadow-none orderByAndBtns"
                   onClick={handleSortByDate}
                   style={{ filter: newestBtnClicked ? "brightness(85%)" : "" }}
                 >
@@ -113,7 +113,7 @@ const HomePage = ({ data, searchQuery }) => {
                 <button
                   onClick={handleSortByVotes}
                   style={{ filter: popularBtnClicked ? "brightness(85%)" : "" }}
-                  className="button-8 shadow-none"
+                  className="button-8 shadow-none orderByAndBtns"
                 >
                   Most Popular
                 </button>
@@ -163,17 +163,17 @@ const HomePage = ({ data, searchQuery }) => {
               <button
                 disabled={currentPage === 1}
                 onClick={() => handlePageChange(currentPage - 1)}
-                className="mx-1 button-4"
+                className="mx-2 button-4s"
               >
                 Previous
               </button>
-              <span>
+              <span className="darkMode">
                 {currentPage} of {totalPages}
               </span>
               <button
                 disabled={currentPage === totalPages}
                 onClick={() => handlePageChange(currentPage + 1)}
-                className="mx-1 button-4"
+                className="mx-2 button-4s"
               >
                 Next
               </button>
