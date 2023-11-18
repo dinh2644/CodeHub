@@ -92,7 +92,7 @@ const RecentCard = ({ data }) => {
               style={{ textDecoration: "none", color: "black" }}
             >
               <div className="container">
-                <hr />
+                <hr style={{ color: "var(--hr)" }} />
                 <div className="row">
                   <div className="col-8">
                     <div
@@ -102,7 +102,7 @@ const RecentCard = ({ data }) => {
                       {mostLiked.title}
                     </div>
                     <div
-                      className="text-muted mb-1 darkMode"
+                      className="mb-1 postedOnText"
                       style={{ fontSize: "13px" }}
                     >
                       Posted {formattedDate}

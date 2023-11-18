@@ -225,7 +225,7 @@ const DetailedPage = ({ data }) => {
                 {/* End modal */}
               </span>
             </div>
-            <hr />
+            <hr style={{ color: "var(--hr)" }} />
           </div>
           {/* Voting */}
           <div className="row">
@@ -261,7 +261,7 @@ const DetailedPage = ({ data }) => {
           {/* Image */}
           {post?.image && (
             <>
-              <hr />
+              <hr style={{ color: "var(--hr)" }} />
               <div className="row">
                 <div className="col d-flex justify-content-center">
                   <img src={post?.image} alt="user's custom image" />

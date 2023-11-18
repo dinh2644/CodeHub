@@ -11,7 +11,7 @@ nav {
 }
 
 .style {
-  color: #ad8b73;
+  color: var(--one);
   font-weight: 500;
 }
 .hub {

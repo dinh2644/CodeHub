@@ -17,6 +17,9 @@
   --image-box: #f7ccac;
   --discuss-box: #dddddd;
   --orderByBorder: #ad8b73;
+  --posted-on-opacity: 0.5;
+  --posted-on-color: #000000;
+  --hr: black;
 }
 
 /* dark mode */
@@ -38,4 +41,7 @@
   --image-box: #98e695;
   --discuss-box: #fafbfc;
   --orderByBorder: #98e695;
+  --posted-on-opacity: 0.5;
+  --posted-on-color: #d4d8df;
+  --hr: white;
 }

@@ -21,3 +21,8 @@
   padding: 5px;
   color: black;
 }
+
+.postedOnText {
+  color: var(--posted-on-color);
+  opacity: var(--posted-on-opacity);
+}
