@@ -83,7 +83,7 @@ const RecentCard = ({ data }) => {
   };
   return (
     <>
-      <div className="card" style={{ width: "29rem" }}>
+      <div className="card">
         <div className="card-body ">
           <h5 className="card-title darkMode" style={{ textAlign: "center" }}>
             🔥 Hottest Post

@@ -67,7 +67,7 @@ const Card = ({ data }) => {
 
   return (
     <>
-      <div className="card cardMain" style={{ width: "68rem" }}>
+      <div className="card cardMain">
         <Link
           to={`${data.id}`}
           style={{ textDecoration: "none", color: "black" }}
@@ -78,7 +78,12 @@ const Card = ({ data }) => {
                 {/* Posted date */}
                 <div className="mt-2 postedText">Posted {formattedDate}</div>
                 {/* Title */}
-                <h4 className="card-title mt-2 cardText">{data.title}</h4>
+                <h4
+                  className="card-title mt-2 cardText"
+                  style={{ fontSize: "21px" }}
+                >
+                  {data.title}
+                </h4>
                 {/* Tags */}
                 <div className="mt-3 mb-2 d-flex">
                   <div

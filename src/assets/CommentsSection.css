@@ -3,7 +3,7 @@ hr {
 }
 
 .content {
-  font-size: 19px;
+  font-size: 17px;
 }
 
 .comment-section {
@@ -14,7 +14,7 @@ hr {
   width: 100%;
   padding: 0.5rem;
   margin: auto;
-  background-color: #f8f9fa;
+  background-color: #faf6f0;
   border: 1px solid #dee2e6;
   color: black !important;
 }

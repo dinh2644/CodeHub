@@ -51,7 +51,7 @@ const HomePage = ({ data, searchQuery }) => {
   };
 
   // handle pagination
-  const itemsPerPage = 10;
+  const itemsPerPage = 4;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
@@ -94,41 +94,56 @@ const HomePage = ({ data, searchQuery }) => {
     <>
       <div className="container mt-3">
         <div className="row">
-          {/* Left Section - Mapped Posts */}
-          <div className="col-10 mt-4 mb-4">
-            {/* Sort buttons and select tags */}
-            <div
-              className="d-flex justify-content-between mb-4 orderByAndBtns"
-              style={{ fontSize: "18px" }}
-            >
-              <div>
-                Order by{" "}
+          <div
+            className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 orderByAndBtns mt-2"
+            style={{ fontSize: "18px" }}
+          >
+            <div className="d-flex ">
+              Order by{" "}
+              <div className="d-flex">
                 <button
                   className="mx-2 button-8 shadow-none orderByAndBtns"
                   onClick={handleSortByDate}
-                  style={{ filter: newestBtnClicked ? "brightness(85%)" : "" }}
+                  style={{
+                    filter: newestBtnClicked ? "brightness(85%)" : "",
+                  }}
                 >
                   Newest
                 </button>
                 <button
                   onClick={handleSortByVotes}
-                  style={{ filter: popularBtnClicked ? "brightness(85%)" : "" }}
+                  style={{
+                    filter: popularBtnClicked ? "brightness(85%)" : "",
+                  }}
                   className="button-8 shadow-none orderByAndBtns"
                 >
                   Most Popular
                 </button>
               </div>
-              <select
-                className="form-select shadow-none"
-                aria-label="Default select example"
-                onChange={(e) => setSelectedTags(e.target.value)}
-              >
-                <option value="">All Posts</option>
-                <option value="code">With Code</option>
-                <option value="image">With Image</option>
-                <option value="general">General Discussion</option>
-              </select>
             </div>
+          </div>
+          <div
+            className="col-xl-6  col-lg-6 col-md-6 col-sm-12 col-xs-12 orderByAndBtns mt-2"
+            style={{ fontSize: "18px" }}
+          >
+            <select
+              className="form-select shadow-none"
+              aria-label="Default select example"
+              onChange={(e) => setSelectedTags(e.target.value)}
+            >
+              <option value="">All Posts</option>
+              <option value="code">With Code</option>
+              <option value="image">With Image</option>
+              <option value="general">General Discussion</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="row mt-3">
+          {/* Left Section - Mapped Posts */}
+          <div className="col-lg-8 col-md-12 ">
+            {/* Sort buttons and select tags */}
+
             {/* Displayed posts */}
             <div className="row">
               {Array.isArray(slicedData) && slicedData.length !== 0 ? (
@@ -139,27 +154,23 @@ const HomePage = ({ data, searchQuery }) => {
                 ))
               ) : (
                 // Display if search bar can't find anything
-                <div className="row">
-                  <div className="col">
-                    <p>No results found on current page.</p>
-                  </div>
+
+                <div className="col">
+                  <p>No results found on current page.</p>
                 </div>
               )}
             </div>
           </div>
 
           {/* Right Section - Single Card */}
-          <div className="col-lg-2" style={{ marginTop: "80px" }}>
+          <div className="col-lg-4 col-md-12">
             <RecentCard data={data} />
           </div>
         </div>
         {/* Pagination */}
         <div className="row">
           <div className="col ">
-            <div
-              className="d-flex align-items-center pagination mb-5 justify-content-center"
-              style={{ marginLeft: "-200px" }}
-            >
+            <div className="d-flex align-items-center pagination mb-5 justify-content-center">
               <button
                 disabled={currentPage === 1}
                 onClick={() => handlePageChange(currentPage - 1)}
