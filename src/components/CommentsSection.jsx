@@ -86,7 +86,7 @@ const CommentsSection = ({ postID }) => {
             <div key={index}>
               <div className="row comment-section">
                 <div className="col">
-                  <div className="text-muted" style={{ fontSize: "15px" }}>
+                  <div style={{ fontSize: "15px", color: "var(--text)" }}>
                     {formattedDate}
                   </div>
 

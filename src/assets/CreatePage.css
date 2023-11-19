@@ -8,7 +8,7 @@
 .keyBar {
   display: flex;
   align-items: center;
-  width: 300px; /* Adjust the width as needed */
+  width: 300px;
   border: 1px solid #ccc;
   border-radius: 4px;
   overflow: hidden;

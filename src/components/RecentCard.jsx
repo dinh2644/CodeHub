@@ -93,7 +93,7 @@ const RecentCard = ({ data }) => {
               to={`${mostLiked.id}`}
               style={{ textDecoration: "none", color: "black" }}
             >
-              <div className="container">
+              <div className="container recentCardContainer">
                 <hr style={{ color: "var(--hr)" }} />
                 <div className="row">
                   <div className="col-8">

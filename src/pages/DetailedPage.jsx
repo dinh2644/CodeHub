@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "../assets/DetailedPage.css";
 import { supabase } from "../client";
 import CommentsSection from "../components/CommentsSection";
@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 
 const DetailedPage = ({ data }) => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [post, setPost] = useState(null);
   const [count, setCount] = useState(0);
   const [comment, setComment] = useState({
@@ -32,6 +33,7 @@ const DetailedPage = ({ data }) => {
         .single();
       if (error) {
         console.error(error);
+        navigate("/404");
       } else {
         setPost(data);
         setCount(data.votes);
@@ -306,7 +308,7 @@ const DetailedPage = ({ data }) => {
                   </h3>
 
                   <textarea
-                    className="form-control mb-2"
+                    className="form-control mb-2 yourAnswerBox"
                     name="content"
                     id="content"
                     cols="30"
@@ -320,8 +322,8 @@ const DetailedPage = ({ data }) => {
                     style={{
                       fontSize: "15px",
                       width: "10rem",
-                      background: "white",
-                      color: "black",
+                      background: "var(--code-box-details)",
+                      color: "var(--text)",
                       padding: "8px",
                     }}
                     type="text"

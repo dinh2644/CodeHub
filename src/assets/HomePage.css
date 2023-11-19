@@ -104,3 +104,29 @@
 .orderByAndBtns {
   color: var(--text);
 }
+
+@media (max-width: 992px) {
+  .dropdownscreensize1 {
+    display: flex;
+    justify-content: start;
+  }
+}
+@media (max-width: 767px) {
+  .dropdownscreensize1 {
+    display: flex;
+    justify-content: start;
+  }
+}
+
+@media (max-width: 992px) {
+  .dropdownscreensize {
+    display: flex;
+    justify-content: end;
+  }
+}
+@media (max-width: 767px) {
+  .dropdownscreensize {
+    display: flex;
+    justify-content: start;
+  }
+}

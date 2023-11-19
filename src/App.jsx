@@ -83,6 +83,7 @@ const App = () => {
             </Route>
             {/* Handle unknown URLs */}
             <Route path="*" element={<PageNotFound />} />
+            <Route path="/404" element={<PageNotFound />} />
           </Routes>
         </Router>
       )}

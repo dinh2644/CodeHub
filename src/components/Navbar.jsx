@@ -26,8 +26,7 @@ const Navbar = ({ handleChange }) => {
   return (
     <>
       <nav className="navbar navbar-expand-lg">
-        <div className="container">
-          {/* Logo */}
+        <div className="container navContainer">
           <a className="navbar-brand" href="/">
             <img
               src={isDarkMode ? LogoWhite : LogoBlack}
@@ -36,7 +35,6 @@ const Navbar = ({ handleChange }) => {
             />
           </a>
 
-          {/* Collapsible button*/}
           <button
             className="navbar-toggler collapsed"
             type="button"
@@ -51,13 +49,12 @@ const Navbar = ({ handleChange }) => {
             <span className="toggler-icon bottom-bar"></span>
           </button>
 
-          {/* Your collapsed button content */}
-          <div
-            className="collapse navbar-collapse "
-            id="navbarSupportedContent"
-          >
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
             {/* Search bar */}
-            <form className="d-flex mx-auto my-2 my-lg-0" id="myform">
+            <form
+              className="d-flex justify-content-center my-2 my-lg-0 ms-lg-auto"
+              id="myform"
+            >
               <input
                 className="form-control shadow-none"
                 type="search"
@@ -84,11 +81,18 @@ const Navbar = ({ handleChange }) => {
                 </svg>
               </button>
             </form>
-            {/* Home/Ask Question Buttons */}
-            <ul className="navbar-nav ">
+
+            {/* Dark mode switch */}
+            <div className="ms-lg-auto mt-3">
+              {" "}
+              <DarkMode setMode={checkIfDarkMode} />
+            </div>
+
+            {/* Buttons */}
+            <ul className="navbar-nav ms-lg-auto">
               <li className="nav-item">
                 <Link
-                  className="nav-link navbarBtns active"
+                  className="nav-link navbarBtns"
                   aria-current="page"
                   to={"/"}
                 >

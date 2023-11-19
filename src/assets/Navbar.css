@@ -62,8 +62,17 @@ nav {
   color: white;
 }
 
+.navContainer {
+  background-color: var(--navbar) !important;
+}
+
 .navbarLogo {
   width: 13rem;
+}
+@media (max-width: 301px) {
+  .navbarLogo {
+    width: 10rem;
+  }
 }
 
 /* Remove border from toggler */
@@ -129,3 +138,9 @@ nav {
 .navbar-toggler.collapsed .toggler-icon {
   background-color: #777777 !important;
 }
+
+.darkModeContainer {
+  position: fixed;
+}
+
+/*************************************************/

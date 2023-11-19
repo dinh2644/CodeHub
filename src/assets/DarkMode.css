@@ -2,7 +2,6 @@
   width: 65px;
   height: 30px;
   position: relative;
-  display: block;
   background: #ebebeb;
   border-radius: 200px;
   box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4),
@@ -10,6 +9,7 @@
   cursor: pointer;
   transition: 0.3s;
 }
+
 .dark_mode_label:after {
   content: "";
   width: 25px;
@@ -25,7 +25,7 @@
 .dark_mode_input {
   width: 0;
   height: 0;
-  visibility: hidden;
+  display: none;
 }
 .dark_mode_input:checked + .dark_mode_label {
   background: #242424;

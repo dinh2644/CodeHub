@@ -14,9 +14,9 @@ hr {
   width: 100%;
   padding: 0.5rem;
   margin: auto;
-  background-color: #faf6f0;
+  background-color: var(--code-box-details) !important;
   border: 1px solid #dee2e6;
-  color: black !important;
+  color: var(--text) !important;
 }
 .comment-divider {
   width: 100%;

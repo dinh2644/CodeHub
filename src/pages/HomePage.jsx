@@ -95,7 +95,7 @@ const HomePage = ({ data, searchQuery }) => {
       <div className="container mt-3">
         <div className="row">
           <div
-            className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 orderByAndBtns mt-2"
+            className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 orderByAndBtns mt-2 dropdownscreensize1"
             style={{ fontSize: "18px" }}
           >
             <div className="d-flex ">
@@ -123,7 +123,7 @@ const HomePage = ({ data, searchQuery }) => {
             </div>
           </div>
           <div
-            className="col-xl-6  col-lg-6 col-md-6 col-sm-12 col-xs-12 orderByAndBtns mt-2"
+            className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 orderByAndBtns mt-2 dropdownscreensize"
             style={{ fontSize: "18px" }}
           >
             <select

@@ -26,3 +26,7 @@
   color: var(--posted-on-color);
   opacity: var(--posted-on-opacity);
 }
+
+.recentCardContainer {
+  background-color: var(--card-body) !important;
+}
